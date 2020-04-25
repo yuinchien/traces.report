@@ -12,7 +12,7 @@ body {
   background: var(--bg);
   color: var(--color);
   margin: 0;
-  padding: 28px 32px;
+  padding: 24px 32px;
 }
 
 body.dark {
@@ -29,6 +29,7 @@ body.dark {
 
 a {
   color: #ff6f59;
+  text-decoration: none;
 }
 
 .clear {

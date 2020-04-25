@@ -33,9 +33,8 @@ function sortOnKeys(dict) {
 function create() {
 	var copy = document.getElementById('copy');
 	var currentCity = RECORDS[RECORDS.length-1].to;
-	var time = now.toDateString();
-	copy.innerHTML = `Current location <span class="city">${currentCity}</span> / <span class="nowrap">Local time <span class="time">${time}</span></span>`;
-// ☀
+	copy.innerHTML = `Current location <span class="city">${currentCity}</span>`;
+
 	for(var key in travelYears) {
 		var div = document.createElement("div");
 		div.setAttribute("id", "year-"+key);
