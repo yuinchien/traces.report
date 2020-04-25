@@ -1,7 +1,7 @@
 # log
 An open source sheet-to-site template for personal travel log. Get started:
 
-1. Create a Google spreadsheet following the <a href="https://docs.google.com/spreadsheets/d/1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw/edit#gid=0" target="blank">spreadsheet template<a>.
+1. Create a Google spreadsheet following the <a href="https://docs.google.com/spreadsheets/d/1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw/edit#gid=0" target="_blank">spreadsheet template<a>.
 
 2. Publish your spreadsheet to the web: File > Publish to the web > Publish
 3. Find the SHEET_ID in the Google spreadsheet url <span>https://docs.google.com/spreadsheets/d/SHEET_ID/edit#gid=0</span>.
