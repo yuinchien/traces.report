@@ -5,7 +5,7 @@ An open source sheet-to-site template for personal travel log. Steps:
 2. Publish your spreadsheet to the web: File > Publish to the web > Publish
 3. Find the SHEET_ID in the Google spreadsheet url
 ![alt text](https://yuinchien.com/log/screenshots/sheet_url.png "Screenshot")
-4. Access the site by replacing the SHEET_ID in url: https://yuinchien.com/log/?id=SHEET_ID. Sample site: [https://yuinchien.com/log/?id=1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw](https://yuinchien.com/log/?id=1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw)
+4. Access the site by replacing the SHEET_ID in url: Sample site: [https://yuinchien.com/log/?id=1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw](https://yuinchien.com/log/?id=1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw)
 
 ![alt text](https://yuinchien.com/log/screenshots/site.png "Screenshot")
 
