@@ -10,6 +10,7 @@ function TravelYear(year) {
 }
 
 TravelYear.prototype.updateTimeInCity = function(city, days) {
+	if(days<=0) { return; }
 	if(this.timeInCity[city]) { this.timeInCity[city] += days; }
 	else { this.timeInCity[city] = days; }
 }
