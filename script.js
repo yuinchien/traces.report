@@ -31,16 +31,14 @@ function sortOnKeys(dict) {
 }
 
 function create() {
-	var copy = document.getElementById('copy');
-	var currentCity = RECORDS[RECORDS.length-1].to;
-	copy.innerHTML = `Current location <span class="city">${currentCity}</span>`;
+	var content = document.getElementById('content');
 
 	for(var key in travelYears) {
 		var div = document.createElement("div");
 		div.setAttribute("id", "year-"+key);
 		div.classList.add("year");
 		div.innerHTML = `<div class="sticky"><div class="title">${key.substring(2)}'</div><div id="summary-${key}" class="summary"></div></div><div id="entries-${key}" class="entries"></div>`;
-		copy.after(div);
+		content.prepend(div);
 		var summary = document.getElementById("summary-"+key);
 		var sortedTimeInCity = sortOnKeys( travelYears[key].timeInCity );
 		for(var i=0; i<sortedTimeInCity.length; i++) {
@@ -58,7 +56,7 @@ function create() {
 		entry.classList.add('entry');
 		var date = RECORDS[i].date.substring(0, RECORDS[i].date.length-5);
 		entry.innerHTML = `<span class="date">${date}</span>${RECORDS[i].to.split(',')[0].trim()}`;
-		parent.prepend(entry);
+		parent.appendChild(entry);
 	}
 	document.body.classList.remove('loading');
 }
