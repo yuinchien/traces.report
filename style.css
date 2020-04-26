@@ -270,7 +270,8 @@ body.loading #loader {
   #content .entries {
     padding-left: 0;
     font-weight: 500;
-    column-count: 1;
+    padding-top: 0.2em;
+    column-count: 2;
   }
   #content .date {
     font-size: 0.75em;
