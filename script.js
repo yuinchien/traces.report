@@ -1,5 +1,4 @@
 var RECORDS = [];
-var selectedYearIndex = 0;
 var now = new Date();
 var travelYears = {};
 
@@ -56,18 +55,49 @@ function create() {
 		var entry = document.createElement("div");
 		entry.classList.add('entry');
 		var date = RECORDS[i].date.substring(0, RECORDS[i].date.length-5);
-		entry.innerHTML = `<span class="date">${date}</span>${RECORDS[i].to.split(',')[0].trim()}`;
+		entry.innerHTML = `<span class="date">${date}</span>${RECORDS[i].to.split(',')[0].trim()} ${RECORDS[i].days}`;
 		parent.appendChild(entry);
 	}
+
+	var totalTimeSpent = {};
+	for(var key in travelYears) {
+		for(var city in travelYears[key].timeInCity) {
+			if(!totalTimeSpent[city]) {
+				totalTimeSpent[city] = 0;
+			}
+			totalTimeSpent[city] += travelYears[key].timeInCity[city];
+		}
+	}
+
+	var yearArray = Object.keys(travelYears).sort();
+	var duration = `${yearArray[0].substring(2)}'–<br>${yearArray[yearArray.length-1].substring(2)}'`;
+
+	var totalTimeSpent = sortOnKeys( totalTimeSpent );
+	var overview = document.createElement("div");
+	overview.setAttribute("id", "overview");
+	overview.innerHTML = `<div class="caption">${duration}</div>`;
+	content.prepend(overview);
+
+	var list = document.createElement("div");
+	list.setAttribute("id", "list");
+	overview.append(list);
+
+	for(var i=0; i<totalTimeSpent.length; i++) {
+		var city = totalTimeSpent[i][0];
+		var days = totalTimeSpent[i][1];
+		var div = document.createElement("div");
+		div.classList.add("list");
+		div.innerHTML = `${totalTimeSpent[i][0].split(',')[0].trim()}<span class="days">${totalTimeSpent[i][1]}d</span>`;
+		list.appendChild(div);
+	}
+
 	document.body.classList.remove('loading');
 }
 
 function loadData() {
-	// console.log('loadData');
-
-	if(now.getHours()>=18 || now.getHours()<6) {
-		document.body.classList.add('dark');
-	}
+	// if(now.getHours()>=18 || now.getHours()<6) {
+	// 	document.body.classList.add('dark');
+	// }
 
 	const urlParams = new URLSearchParams(window.location.search);
  	const sheetId = urlParams.get('id');
@@ -80,28 +110,21 @@ function loadData() {
 			})
 			.then(function(myJson) {
 				let entries = myJson.feed.entry || [];
-				entries = entries.sort((a, b) => (new Date(a.gsx$departuredate.$t.trim())).getTime() - (new Date(b.gsx$departuredate.$t.trim())).getTime() );
-
+				entries = entries.sort((a, b) => (new Date(a['gsx$arrival']['$t'].trim())).getTime() - (new Date(b['gsx$arrival']['$t'].trim())).getTime() );
 				for(var i = 0; i < entries.length; ++i) {
 					var entry = entries[i];
-					var from = entry['gsx$fromcity']['$t'].trim() + ', '+ entry['gsx$tocountry']['$t'].trim();
-					var to = entry['gsx$tocity']['$t'].trim() + ', '+ entry['gsx$tocountry']['$t'].trim();
-					var date = entry['gsx$departuredate']['$t'].trim();
-
+					var to = entry['gsx$city']['$t'].trim() + ', '+ entry['gsx$country']['$t'].trim();
+					var date = entry['gsx$arrival']['$t'].trim();
 					var d = new Date(date);
 					var y = d.getFullYear();
 					try {
-						var nextEntryFrom = to;
-						var nextEntryDate = new Date().toLocaleDateString("en-US");
-
+						var nextEntryD = new Date();
 						if(i!=entries.length-1) {
-							nextEntryDate = entries[i+1]['gsx$departuredate']['$t'].trim();;
-							nextEntryFrom = entries[i+1]['gsx$fromcity']['$t'].trim() + ', ' + entries[i+1]['gsx$fromcountry']['$t'].trim();
+							nextEntryD = new Date( entries[i+1]['gsx$arrival']['$t'].trim() );
 						}
-						var nextEntryD = new Date(nextEntryDate);
 						var totalDays = 0;
+
 						if(d.getFullYear()!=nextEntryD.getFullYear()) {
-							// add to next year
 							var gapDays = daysBetweenInSameYear( new Date(nextEntryD.getFullYear(), 0, 1), nextEntryD);
 							if(!travelYears[nextEntryD.getFullYear()]) {
 								travelYears[nextEntryD.getFullYear()] = new TravelYear(nextEntryD.getFullYear());
@@ -116,18 +139,17 @@ function loadData() {
 									travelYears[middleYear].updateTimeInCity(to, 365);
 								}
 							}
-
 							travelYears[nextEntryD.getFullYear()].updateTimeInCity(to, gapDays);
-							nextEntryD = new Date(d.getFullYear(), 11, 31);
+							nextEntryD = new Date(d.getFullYear(), 11, 31, 23, 59);
 							totalDays = gapDays;
 						}
-						var days = Math.max(1, daysBetweenInSameYear(d, nextEntryD));
+						var days = daysBetweenInSameYear(d, nextEntryD);
 						if(!travelYears[y]) {
 							travelYears[y] = new TravelYear(y);
 						}
 						travelYears[y].updateTimeInCity(to, days);
 						totalDays += days;
-						RECORDS.push( {date: date, from: from, to: to, days: totalDays} );
+						RECORDS.push( {date: date, to: to, days: days} );
 					} catch(e) {
 						console.log('ERROR: ',RECORDS[i],e);
 					}
