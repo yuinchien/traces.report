@@ -1,5 +1,4 @@
 var RECORDS = [];
-var now = new Date();
 var travelYears = {};
 
 function TravelYear(year) {
@@ -37,7 +36,7 @@ function create() {
 		var div = document.createElement("div");
 		div.setAttribute("id", "year-"+key);
 		div.classList.add("year");
-		div.innerHTML = `<div class="sticky"><div class="title">${key.substring(2)}'</div><div id="summary-${key}" class="summary"></div></div><div id="entries-${key}" class="entries"></div>`;
+		div.innerHTML = `<div class="title">${key.substring(2)}'</div><div class="row"><div id="summary-${key}" class="summary"></div><div id="entries-${key}" class="entries"></div></div>`;
 		content.prepend(div);
 		var summary = document.getElementById("summary-"+key);
 		var sortedTimeInCity = sortOnKeys( travelYears[key].timeInCity );
@@ -55,7 +54,7 @@ function create() {
 		var entry = document.createElement("div");
 		entry.classList.add('entry');
 		var date = RECORDS[i].date.substring(0, RECORDS[i].date.length-5);
-		entry.innerHTML = `<span class="date">${date}</span>${RECORDS[i].to.split(',')[0].trim()}`;
+		entry.innerHTML = `<span class="date">${date}</span>${RECORDS[i].city.split(',')[0].trim()}`;
 		parent.appendChild(entry);
 	}
 
@@ -95,12 +94,12 @@ function create() {
 }
 
 function loadData() {
-	// if(now.getHours()>=18 || now.getHours()<6) {
-	// 	document.body.classList.add('dark');
-	// }
 
 	const urlParams = new URLSearchParams(window.location.search);
- 	const sheetId = urlParams.get('id');
+ 	const sheetId = urlParams.get('id') || "1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw";
+	if(urlParams.get('id')==null) {
+		window.location.search = `id=${sheetId}`;
+	}
 	const url = `https://spreadsheets.google.com/feeds/list/${sheetId}/od6/public/values?alt=json`;
 
 	try {
@@ -113,8 +112,9 @@ function loadData() {
 				entries = entries.sort((a, b) => (new Date(a['gsx$arrival']['$t'].trim())).getTime() - (new Date(b['gsx$arrival']['$t'].trim())).getTime() );
 				for(var i = 0; i < entries.length; ++i) {
 					var entry = entries[i];
-					var to = entry['gsx$city']['$t'].trim() + ', '+ entry['gsx$country']['$t'].trim();
+					var city = entry['gsx$city']['$t'].trim() + ', '+ entry['gsx$country']['$t'].trim();
 					var date = entry['gsx$arrival']['$t'].trim();
+
 					var d = new Date(date);
 					var y = d.getFullYear();
 					try {
@@ -136,10 +136,10 @@ function loadData() {
 									if(!travelYears[middleYear]) {
 										travelYears[middleYear] = new TravelYear(middleYear);
 									}
-									travelYears[middleYear].updateTimeInCity(to, 365);
+									travelYears[middleYear].updateTimeInCity(city, 365);
 								}
 							}
-							travelYears[nextEntryD.getFullYear()].updateTimeInCity(to, gapDays);
+							travelYears[nextEntryD.getFullYear()].updateTimeInCity(city, gapDays);
 							nextEntryD = new Date(d.getFullYear(), 11, 31, 23, 59);
 							totalDays = gapDays;
 						}
@@ -147,16 +147,12 @@ function loadData() {
 						if(!travelYears[y]) {
 							travelYears[y] = new TravelYear(y);
 						}
-						travelYears[y].updateTimeInCity(to, days);
+						travelYears[y].updateTimeInCity(city, days);
 						totalDays += days;
-						RECORDS.push( {date: date, to: to, days: days} );
+						RECORDS.push( {date: date, city: city, days: days} );
 					} catch(e) {
 						console.log('ERROR: ',RECORDS[i],e);
 					}
-				}
-
-				for(var i=0; i<travelYears.length; i++) {
-					travelYears[i];
 				}
 				create();
 		});
