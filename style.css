@@ -114,7 +114,7 @@ a {
   display: flex;
   width: 33.33%;
   z-index: 1000;
-  font-size: 4.5em;
+  font-size: 4.2em;
   line-height: 0.75em;
   margin-bottom: 8px;
   margin-left: -0.02em;
@@ -158,7 +158,7 @@ a {
   margin-bottom: .5em;
 }
 #overview .caption {
-  font-size: 5em;
+  font-size: 4.8em;
   line-height: 0.9em;
   float: left;
   position: sticky;
@@ -263,6 +263,7 @@ body.loading #loader {
     background: var(--bg);
     z-index: 100;
     padding: .2em 0;
+    margin-bottom: 0;
   }
   #content .summary {
     padding: 0em 0 0.05em 0;

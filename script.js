@@ -36,7 +36,7 @@ function create() {
 		var div = document.createElement("div");
 		div.setAttribute("id", "year-"+key);
 		div.classList.add("year");
-		div.innerHTML = `<div class="title">${key.substring(2)}'</div><div class="row"><div id="summary-${key}" class="summary"></div><div id="entries-${key}" class="entries"></div></div>`;
+		div.innerHTML = `<div class="title">${key}</div><div class="row"><div id="summary-${key}" class="summary"></div><div id="entries-${key}" class="entries"></div></div>`;
 		content.prepend(div);
 		var summary = document.getElementById("summary-"+key);
 		var sortedTimeInCity = sortOnKeys( travelYears[key].timeInCity );
@@ -69,7 +69,7 @@ function create() {
 	}
 
 	var yearArray = Object.keys(travelYears).sort();
-	var duration = `${yearArray[0].substring(2)}'–<br>${yearArray[yearArray.length-1].substring(2)}'`;
+	var duration = `${yearArray[0]}–<br>${yearArray[yearArray.length-1]}`;
 
 	var totalTimeSpent = sortOnKeys( totalTimeSpent );
 	var overview = document.createElement("div");
