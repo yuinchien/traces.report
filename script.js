@@ -1,5 +1,5 @@
-var RECORDS = [];
-var travelYears = {};
+let RECORDS = [];
+let travelYears = {};
 
 function TravelYear(year) {
 	this.year = year;
@@ -14,15 +14,15 @@ TravelYear.prototype.updateTimeInCity = function(city, days) {
 }
 
 function daysBetweenInSameYear(from,to) {
-  var millisecondsPerDay = 1000 * 60 * 60 * 24;
-	var millisBetween = to.getTime() - from.getTime();
-  var days = millisBetween / millisecondsPerDay;
+  let millisecondsPerDay = 1000 * 60 * 60 * 24;
+	let millisBetween = to.getTime() - from.getTime();
+  let days = millisBetween / millisecondsPerDay;
   return Math.round(days);
 }
 
 function sortOnKeys(dict) {
-	var sortable = [];
-	for (var obj in dict) {
+	let sortable = [];
+	for (let obj in dict) {
 		sortable.push([obj, dict[obj]]);
 	}
 	sortable.sort(function(a, b) {return b[1] - a[1] });
@@ -30,37 +30,37 @@ function sortOnKeys(dict) {
 }
 
 function create() {
-	var content = document.getElementById('content');
+	let content = document.getElementById('content');
 
-	for(var key in travelYears) {
-		var div = document.createElement("div");
+	for(let key in travelYears) {
+		let div = document.createElement("div");
 		div.setAttribute("id", "year-"+key);
 		div.classList.add("year");
 		div.innerHTML = `<div class="title">'${key.substring(2)}</div><div class="row"><div id="summary-${key}" class="summary"></div><div id="entries-${key}" class="entries"></div></div>`;
 		content.prepend(div);
-		var summary = document.getElementById("summary-"+key);
-		var sortedTimeInCity = sortOnKeys( travelYears[key].timeInCity );
-		for(var i=0; i<sortedTimeInCity.length; i++) {
-			var data = sortedTimeInCity[i];
-			var div = document.createElement("div");
+		let summary = document.getElementById("summary-"+key);
+		let sortedTimeInCity = sortOnKeys( travelYears[key].timeInCity );
+		for(let i=0; i<sortedTimeInCity.length; i++) {
+			let data = sortedTimeInCity[i];
+			let div = document.createElement("div");
 			div.classList.add("list");
 			div.innerHTML = `${data[0].split(',')[0].trim()}<span class="days">${data[1]}d</span>`;
 			summary.appendChild(div);
 		}
 	}
-	for(var i=RECORDS.length-1; i>=0; i--) {
-		var year = RECORDS[i].date.substring(RECORDS[i].date.length-4, RECORDS[i].date.length);
-		var parent = document.getElementById("entries-"+year);
-		var entry = document.createElement("div");
+	for(let i=RECORDS.length-1; i>=0; i--) {
+		let year = RECORDS[i].date.substring(RECORDS[i].date.length-4, RECORDS[i].date.length);
+		let parent = document.getElementById("entries-"+year);
+		let entry = document.createElement("div");
 		entry.classList.add('entry');
-		var date = RECORDS[i].date.substring(0, RECORDS[i].date.length-5);
+		let date = RECORDS[i].date.substring(0, RECORDS[i].date.length-5);
 		entry.innerHTML = `<span class="date">${date}</span>${RECORDS[i].city.split(',')[0].trim()}`;
 		parent.appendChild(entry);
 	}
 
-	var totalTimeSpent = {};
-	for(var key in travelYears) {
-		for(var city in travelYears[key].timeInCity) {
+	let totalTimeSpent = {};
+	for(let key in travelYears) {
+		for(let city in travelYears[key].timeInCity) {
 			if(!totalTimeSpent[city]) {
 				totalTimeSpent[city] = 0;
 			}
@@ -68,23 +68,23 @@ function create() {
 		}
 	}
 
-	var yearArray = Object.keys(travelYears).sort();
-	var duration = `'${yearArray[0].substring(2)}–<br>'${yearArray[yearArray.length-1].substring(2)}`;
+	let yearArray = Object.keys(travelYears).sort();
+	let duration = `'${yearArray[0].substring(2)}–<br>'${yearArray[yearArray.length-1].substring(2)}`;
 
-	var totalTimeSpent = sortOnKeys( totalTimeSpent );
-	var overview = document.createElement("div");
+	totalTimeSpent = sortOnKeys( totalTimeSpent );
+	let overview = document.createElement("div");
 	overview.setAttribute("id", "overview");
 	overview.innerHTML = `<div class="caption">${duration}</div>`;
 	content.prepend(overview);
 
-	var list = document.createElement("div");
+	let list = document.createElement("div");
 	list.setAttribute("id", "list");
 	overview.append(list);
 
-	for(var i=0; i<totalTimeSpent.length; i++) {
-		var city = totalTimeSpent[i][0];
-		var days = totalTimeSpent[i][1];
-		var div = document.createElement("div");
+	for(let i=0; i<totalTimeSpent.length; i++) {
+		let city = totalTimeSpent[i][0];
+		let days = totalTimeSpent[i][1];
+		let div = document.createElement("div");
 		div.classList.add("list");
 		div.innerHTML = `${totalTimeSpent[i][0].split(',')[0].trim()}<span class="days">${totalTimeSpent[i][1]}d</span>`;
 		list.appendChild(div);
@@ -110,29 +110,29 @@ function loadData() {
 			.then(function(myJson) {
 				let entries = myJson.feed.entry || [];
 				entries = entries.sort((a, b) => (new Date(a['gsx$arrival']['$t'].trim())).getTime() - (new Date(b['gsx$arrival']['$t'].trim())).getTime() );
-				for(var i = 0; i < entries.length; ++i) {
-					var entry = entries[i];
-					var city = entry['gsx$city']['$t'].trim() + ', '+ entry['gsx$country']['$t'].trim();
-					var date = entry['gsx$arrival']['$t'].trim();
+				for(let i = 0; i < entries.length; ++i) {
+					let entry = entries[i];
+					let city = entry['gsx$city']['$t'].trim() + ', '+ entry['gsx$country']['$t'].trim();
+					let date = entry['gsx$arrival']['$t'].trim();
 
-					var d = new Date(date);
-					var y = d.getFullYear();
+					let d = new Date(date);
+					let y = d.getFullYear();
 					try {
-						var nextEntryD = new Date();
+						let nextEntryD = new Date();
 						if(i!=entries.length-1) {
 							nextEntryD = new Date( entries[i+1]['gsx$arrival']['$t'].trim() );
 						}
-						var totalDays = 0;
+						let totalDays = 0;
 
 						if(d.getFullYear()!=nextEntryD.getFullYear()) {
-							var gapDays = daysBetweenInSameYear( new Date(nextEntryD.getFullYear(), 0, 1), nextEntryD);
+							let gapDays = daysBetweenInSameYear( new Date(nextEntryD.getFullYear(), 0, 1), nextEntryD);
 							if(!travelYears[nextEntryD.getFullYear()]) {
 								travelYears[nextEntryD.getFullYear()] = new TravelYear(nextEntryD.getFullYear());
 							}
 							if((d.getFullYear() - nextEntryD.getFullYear()) != -1) {
-								var diff = nextEntryD.getFullYear() - d.getFullYear();
-								for(var j=1; j<diff; j++) {
-									var middleYear = d.getFullYear() + j;
+								let diff = nextEntryD.getFullYear() - d.getFullYear();
+								for(let j=1; j<diff; j++) {
+									let middleYear = d.getFullYear() + j;
 									if(!travelYears[middleYear]) {
 										travelYears[middleYear] = new TravelYear(middleYear);
 									}
@@ -143,7 +143,7 @@ function loadData() {
 							nextEntryD = new Date(d.getFullYear(), 11, 31, 23, 59);
 							totalDays = gapDays;
 						}
-						var days = daysBetweenInSameYear(d, nextEntryD);
+						let days = daysBetweenInSameYear(d, nextEntryD);
 						if(!travelYears[y]) {
 							travelYears[y] = new TravelYear(y);
 						}
