@@ -41,7 +41,7 @@ a {
   right: 0;
   top: 0;
   z-index: 1000;
-  padding-top: 8px;
+  margin: 16px 20px;
 }
 #copy {
   margin-bottom: 1em;
@@ -69,11 +69,6 @@ a {
   padding-left: 8px;
 }
 
-#content {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-  transition: all 0.4s;
-}
 #content .year {
   margin-bottom: 1.5em;
   clear: both;
@@ -147,14 +142,20 @@ a {
   margin-bottom: .75em;
 }
 
+.wip {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: all 0.4s;
+}
+body.loading .wip {
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+}
 
 body.loading #loader {
   display: block;
 }
-body.loading #content {
-  opacity: 0;
-  transform: translate3d(0, 10px, 0);
-}
+
 #loader {
   display: none;
   position: absolute;
@@ -187,8 +188,8 @@ body.loading #content {
   #overview {
     display: block;
   }
-  #overview .caption {
-    margin-bottom: .1em;
+  #overview #list {
+    margin-top: .2em;
   }
 }
 
@@ -198,11 +199,25 @@ body.loading #content {
     line-height: 22px;
     padding: 12px 16px;
   }
+  #overview {
+    border-bottom: none;
+  }
   #overview #list {
     column-count: 1;
   }
   #content .year {
     margin-bottom: 20px;
+  }
+  #content .caption {
+    border-bottom: 1px solid var(--color);
+    position: sticky;
+    top: 0;
+    background: white;
+    float: none;
+    z-index: 1000;
+    padding-top: .2em;
+    padding-bottom: .2em;
+    font-size: 4em;
   }
   #content .sticky {
     display: block;
@@ -224,7 +239,7 @@ body.loading #content {
     margin-right: .5em;
   }
   #content .title {
-    font-size: 2.2em;
+    font-size: 3em;
   }
   #content .summary {
     font-size: 1.32em;
