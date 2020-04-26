@@ -8,3 +8,5 @@ An open source sheet-to-site template for personal travel log. 3 steps to create
 ![alt text](https://yuinchien.com/log/screenshots/sheet_url.png "Screenshot")
 ![alt text](https://yuinchien.com/log/screenshots/site.png "Screenshot")
 ![alt text](https://yuinchien.com/log/screenshots/sheet.png "Screenshot")
+
+Checkout the original project [Travel Log](https://yuinchien.com/travel-log/) by [Yuin Chien](https://yuinchien.com/).
