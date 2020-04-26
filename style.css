@@ -12,7 +12,7 @@ body {
   background: var(--bg);
   color: var(--color);
   margin: 0;
-  padding: 24px 32px;
+  padding: 16px 32px;
 }
 
 body.dark {
@@ -40,6 +40,7 @@ a {
   right: 0;
   top: 0;
   z-index: 1000;
+  padding-top: 8px;
 }
 #copy {
   margin-bottom: 1em;
