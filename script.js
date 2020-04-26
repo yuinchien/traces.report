@@ -55,7 +55,7 @@ function create() {
 		var entry = document.createElement("div");
 		entry.classList.add('entry');
 		var date = RECORDS[i].date.substring(0, RECORDS[i].date.length-5);
-		entry.innerHTML = `<span class="date">${date}</span>${RECORDS[i].to.split(',')[0].trim()} ${RECORDS[i].days}`;
+		entry.innerHTML = `<span class="date">${date}</span>${RECORDS[i].to.split(',')[0].trim()}`;
 		parent.appendChild(entry);
 	}
 
