@@ -100,7 +100,6 @@ const handleClientLoad = () => {
 		})
 }
 
-
 class TravelYear {
 	constructor(year) {
 		this.year = year;
@@ -133,15 +132,15 @@ const create = (data) => {
 	let rows = data.rows;
 	let travelYears = data.travelYears;
 
-	let content = document.getElementById('content');
+	let sections = document.getElementById('sections');
 
 	for(let year in travelYears) {
 		let div = document.createElement("div");
-		content.prepend(div);
+		sections.prepend(div);
 		const markup = `
-			<div id="year-${year}" class="year">
+			<div class="section">
 				<div class="title">'${year.substring(2)}</div>
-				<div class="row">
+				<div class="row content">
 					<div id="summary-${year}" class="summary"></div>
 					<div id="entries-${year}" class="entries"></div>
 				</div>
@@ -168,10 +167,15 @@ const create = (data) => {
 	}
 
 	let totalTimeSpent = {};
+	let countries = {};
 	for(let key in travelYears) {
 		for(let city in travelYears[key].timeInCity) {
+			var country = city.split(',')[1].trim();
 			if(!totalTimeSpent[city]) {
 				totalTimeSpent[city] = 0;
+			}
+			if(!countries[country]) {
+				countries[country] = 1;
 			}
 			totalTimeSpent[city] += travelYears[key].timeInCity[city];
 		}
@@ -182,22 +186,28 @@ const create = (data) => {
 
 	totalTimeSpent = sortOnKeys( totalTimeSpent );
 	let overview = document.createElement("div");
-	overview.setAttribute("id", "overview");
-	overview.innerHTML = `<div class="caption">${duration}</div>`;
-	content.prepend(overview);
+	sections.prepend(overview);
+	const markupOverview = `
+		<div id="overview" class="section">
+			<div class="title">${duration}</div>
+			<div class="content">
+				<div class="summary" id="summary-overview"></div>
+			</div>
+		</div>
+	`;
+	overview.outerHTML = markupOverview;
 
-	let list = document.createElement("div");
-	list.setAttribute("id", "list");
-	overview.append(list);
-
+	var summary = document.getElementById("summary-overview");
 	for(let i=0; i<totalTimeSpent.length; i++) {
 		let city = totalTimeSpent[i][0];
 		let days = totalTimeSpent[i][1];
 		let div = document.createElement("div");
 		div.classList.add("list");
-		div.innerHTML = `${totalTimeSpent[i][0].split(',')[0].trim()}<span class="days">${totalTimeSpent[i][1]}d</span>`;
-		list.appendChild(div);
+		div.innerHTML = `${city.split(',')[0].trim()}<span class="days">${days}d</span>`;
+		summary.appendChild(div);
 	}
+
+	console.log(`Lived in ${Object.keys(countries).length} countries, ${Object.keys(totalTimeSpent).length} cities.`);
 
 	document.body.classList.remove('loading');
 }

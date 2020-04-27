@@ -3,16 +3,19 @@
   --color: #222;
   --bg: #fff;
   --opacity-low: 0.5;
+  --padding: 32px;
+  --font-size: 24px;
+  --line-height: 26px;
 }
 
 body {
-  font-size: 24px;
-  line-height: 26px;
+  font-size: var(--font-size);
+  line-height: var(--line-height);
   font-family: 'EB Garamond', serif;
   background: var(--bg);
   color: var(--color);
   margin: 0;
-  padding: 16px 32px;
+  padding: var(--padding);
 }
 
 body.dark {
@@ -32,20 +35,8 @@ a {
   text-decoration: none;
 }
 
-.highlight {
-  font-style: italic;
-  font-weight: 500;
-}
-
-.row {
-  display: flex;
-  padding-top: .65em;
-}
-
-
 #copy {
   margin-bottom: 1em;
-
 }
 #copy .highlight {
   font-style: italic;
@@ -61,19 +52,6 @@ a {
   bottom: 2px;
   content: "";
   background: #FFE800;
-}
-
-
-#link-github {
-  position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 1001;
-  margin: 16px 20px;
-}
-#copy {
-  margin-bottom: 1em;
-
 }
 #copy .city,
 #copy .time {
@@ -93,54 +71,61 @@ a {
   background: #FFE800;
 }
 
-#copy .symbol {
-  padding-left: 8px;
-}
-
-#content .year {
-  margin-bottom: 1.5em;
+.section {
   clear: both;
+  border-top: 1px solid var(--color);
+  margin-bottom: calc(2.5 * var(--padding));
 }
-#content .entries {
-  padding-top: 0.1em;
+  #overview {
+    border-top: none;
+  }
+
+.content {
+  padding-top: calc(1.25 * var(--padding));
 }
-#content .title {
+  #overview .content {
+    column-gap: 0;
+    column-count: 2;
+  }
+
+
+.title {
   position: sticky;
   top: 0px;
   float: left;
-  display: flex;
   width: 33.33%;
   z-index: 1000;
   font-size: 4.5em;
-  line-height: 0.75em;
-  margin-bottom: 8px;
-  margin-left: -0.02em;
-  padding-top: 16px;
+  line-height: 0.9em;
+  padding-top: var(--padding);
 }
 
-#overview #list,
-#content .summary {
+.row {
+  display: flex;
+}
+.row > div {
+  flex: 1;
+}
+.summary {
   font-size: 1.5em;
   line-height: 1.25em;
 }
-
-#content .summary,
-#content .entries {
-  flex: 1;
-}
-
-#content .days {
+.days {
   font-style: italic;
   padding: 0 0.25em;
   opacity: var(--opacity-low);
 }
-#content .entry {
+
+.entries {
+  padding-top: 0.2em;
+}
+.entry {
   position: relative;
 }
-#content .entry > * {
+.entry > * {
   display: inline-block;
 }
-#content .date {
+.date {
   font-weight: 500;
   font-size: 0.6em;
   width: 2.5em;
@@ -148,27 +133,6 @@ a {
   margin-right: 0.8em;
   opacity: var(--opacity-low);
   font-weight: 700;
-}
-
-#overview {
-  border-bottom: 1px solid var(--color);
-  margin-bottom: .5em;
-}
-#overview .caption {
-  font-size: 5em;
-  line-height: 0.9em;
-  float: left;
-  position: sticky;
-  top: 0;
-  width: 33.33%;
-  padding-bottom: 0.2em;
-  z-index: 1000;
-}
-#overview #list {
-  column-gap: 0;
-  column-count: 2;
-  padding-top: .15em;
-  margin-bottom: .75em;
 }
 
 .wip {
@@ -207,78 +171,37 @@ body.loading #loader {
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
-@media (max-width: 1080px) {
+@media (max-width: 1040px) {
   body {
-    padding: 12px 16px;
-  }
-  .row {
-    padding-top: 0em;
-  }
-  #overview {
-    border-bottom: none;
-    margin-bottom: 2em;
-  }
-  #overview #list {
-    margin-bottom: 0;
-    margin-top: .2em;
-  }
-  #content .title,
-  #content .caption {
-    border-bottom: 1px solid var(--color);
-    float: none;
-    padding: .1em 0;
-    background: var(--bg);
-    width: 100%;
-  }
-  #content .title {
-    padding-bottom: .15em;
+    --font-size: 20px;
+    --line-height: 24px;
+    --padding: 16px;
   }
 }
-
-@media (max-width: 640px) {
+@media (max-width: 720px) {
   body {
-    font-size: 18px;
-    line-height: 22px;
-    padding: 8px 12px;
+    --font-size: 18px;
+    --line-height: 22px;
+    --padding: 12px;
   }
-  #content .summary,
-  #overview #list {
-    font-size: 1.75em;
-    line-height: 1.15em;
+  #overview .content {
     column-count: 1;
   }
-  .row {
-    display: block;
-  }
-
-  #content .year {
-    margin-bottom: 0.5em;;
-  }
-  #content .title {
-    display: block;
-    width: auto;
+  #overview .title {
     float: none;
+    width: 100%;
     background: var(--bg);
-    z-index: 100;
-    padding: .2em 0;
-    margin-bottom: 0.1em;
+    border-bottom: 1px solid var(--color);
+    padding-bottom: calc(var(--padding) * 1.5);
   }
-
-  #content .entries {
-    padding-left: 0;
-    font-weight: 500;
-    padding-top: 0.2em;
-    column-count: 2;
+  .title {
+    font-size: 4.25em;
+    line-height: .9em;
   }
-  #content .date {
-    font-size: 0.75em;
-    margin-right: .5em;
+  .row {
+    flex-direction: column;
   }
-  #content .nowrap {
-    white-space: nowrap;
+  .entries {
+    margin-top: calc(var(--padding) / 4);
   }
-  #content .days {
-    padding: 0 0.15em;
-  }
-
 }
