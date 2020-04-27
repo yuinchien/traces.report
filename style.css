@@ -3,7 +3,7 @@
   --color: #222;
   --bg: #fff;
   --opacity-low: 0.5;
-  --padding: 24px;
+  --padding: 32px;
   --font-size: 24px;
   --line-height: 26px;
 }
@@ -36,9 +36,9 @@ a {
 }
 
 #blurb {
-  padding-bottom: calc(1 * var(--padding));
+  padding-bottom: calc(0.6 * var(--padding));
   line-height: 1.2em;
-  /* padding-top: calc(0.5 * var(--padding)); */
+  margin-top: calc(-0.4 * var(--padding));
 }
 .highlight {
   font-style: italic;
@@ -62,7 +62,7 @@ a {
   margin-bottom: calc(2.5 * var(--padding));
 }
 .content {
-  padding-top: calc(1.25 * var(--padding));
+  padding-top: calc(0.7 * var(--padding));
 }
   #overview .content {
     column-gap: 0;
@@ -78,7 +78,7 @@ a {
   z-index: 1000;
   font-size: 4.5em;
   line-height: 0.9em;
-  padding-top: var(--padding);
+  padding-top: calc(var(--padding) / 2);
   margin-left: -0.05em;
 }
 
