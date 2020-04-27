@@ -1,10 +1,8 @@
-
 function TravelYear(year) {
 	this.year = year;
 	this.timeInCity = {};
 	return this;
 }
-
 TravelYear.prototype.updateTimeInCity = function(city, days) {
 	if(days<=0) { return; }
 	if(this.timeInCity[city]) { this.timeInCity[city] += days; }
@@ -28,7 +26,7 @@ function sortOnKeys(dict) {
 }
 
 function create(data) {
-	let records = data.records;
+	let rows = data.rows;
 	let travelYears = data.travelYears;
 
 	let content = document.getElementById('content');
@@ -49,13 +47,13 @@ function create(data) {
 			summary.appendChild(div);
 		}
 	}
-	for(let i=records.length-1; i>=0; i--) {
-		let year = records[i].date.substring(records[i].date.length-4, records[i].date.length);
+	for(let i=rows.length-1; i>=0; i--) {
+		let year = rows[i][0].substring(rows[i][0].length-4);
 		let parent = document.getElementById("entries-"+year);
 		let entry = document.createElement("div");
 		entry.classList.add('entry');
-		let date = records[i].date.substring(0, records[i].date.length-5);
-		entry.innerHTML = `<span class="date">${date}</span>${records[i].city.split(',')[0].trim()}`;
+		let date = rows[i][0].substring(0, rows[i][0].length-5);
+		entry.innerHTML = `<span class="date">${date}</span>${rows[i][1]}`;
 		parent.appendChild(entry);
 	}
 
@@ -132,25 +130,19 @@ const fetchRows = (sheetName) => {
 	return fetch(sheetRowsURL(SHEET_ID, sheetName))
 		.then(response => response.json())
 		.then(json => {
-			let data = json.values.slice(1).sort((a, b) => (new Date(a[0])).getTime() - (new Date(b[0])).getTime() );
-			let records = [];
+			let rows = json.values.slice(1).sort((a, b) => (new Date(a[0])).getTime() - (new Date(b[0])).getTime() );
 			let travelYears = {};
-
-			for(let i=0; i<data.length; i++) {
-				let city = `${data[i][1].trim()}, ${data[i][2].trim()}`;
-				let date = data[i][0];
-
+			for(let i=0; i<rows.length; i++) {
+				let city = `${rows[i][1].trim()}, ${rows[i][2].trim()}`;
+				let date = rows[i][0];
 				let d = new Date(date);
 				let y = d.getFullYear();
-
 				try {
 					let nextEntryD = new Date();
-					// console.log(i);
-					if(i!=data.length-1) {
-						nextEntryD = new Date( data[i+1][0] );
+					if(i!=rows.length-1) {
+						nextEntryD = new Date( rows[i+1][0] );
 					}
 					let totalDays = 0;
-
 					if(d.getFullYear()!=nextEntryD.getFullYear()) {
 						let gapDays = daysBetweenInSameYear( new Date(nextEntryD.getFullYear(), 0, 1), nextEntryD);
 						if(!travelYears[nextEntryD.getFullYear()]) {
@@ -176,17 +168,14 @@ const fetchRows = (sheetName) => {
 					}
 					travelYears[y].updateTimeInCity(city, days);
 					totalDays += days;
-					records.push( {date: date, city: city, days: days} );
 				} catch(e) {
 					console.error(e)
 				}
 			}
-
 			return {
-				records: records,
+				rows: rows,
 				travelYears: travelYears
 			};
-
 		})
 		.catch(err => {
 			console.error(err)
