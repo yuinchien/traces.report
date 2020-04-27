@@ -12,6 +12,7 @@ const SHEET_ID = urlParams.get('id') || "1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8
 if(urlParams.get('id')==null) {
 	window.location.search = `id=${SHEET_ID}`;
 }
+// const SHEET_ID = "1gymcYHZnSsnyLJbeLsDf3idC74RJPWJ6CvAQklKdD-A";
 
 const sheetURL = (sheetId) => {
 	return `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}?key=${SHEET_API_KEY}`
@@ -195,14 +196,14 @@ const create = (data) => {
 	const markupOverview = `
 		<div id="overview" class="section">
 			<div class="title">${duration}</div>
-			<div class="content">
+			<div class="content" id="content-overview">
 				<div class="summary" id="summary-overview"></div>
 			</div>
 		</div>
 	`;
 	overview.outerHTML = markupOverview;
 
-	var summary = document.getElementById("summary-overview");
+	const summary = document.getElementById("summary-overview");
 	for(let i=0; i<totalTimeSpent.length; i++) {
 		let city = totalTimeSpent[i][0];
 		let days = totalTimeSpent[i][1];
@@ -212,12 +213,13 @@ const create = (data) => {
 		summary.appendChild(div);
 	}
 
+	const contentOverview = document.getElementById("content-overview");
 	let blurb = document.createElement("div");
-	sections.prepend(blurb);
+	contentOverview.prepend(blurb);
 	const markupBlurb = `
 		<div id="blurb">
 			<div>Visited <span class="highlight">${Object.keys(countries).length} countries</span> & <span class="highlight">${Object.keys(totalTimeSpent).length} cities</span>.</div>
-			<div>Current location <span class="highlight">${rows[rows.length-1][1]}, ${rows[rows.length-1][2]}</span>.</div>
+			<div>Currently in <span class="highlight">${rows[rows.length-1][1]}<span class="mobile-hide">, ${rows[rows.length-1][2]}</span></span>.</div>
 		</div>
 	`;
 	blurb.outerHTML = markupBlurb;

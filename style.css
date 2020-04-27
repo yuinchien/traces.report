@@ -40,14 +40,16 @@ a {
 }
 
 #blurb {
-  padding-bottom: calc(0.6 * var(--padding));
+  margin-top: calc(var(--padding) * 0.15);
+  margin-bottom: calc(var(--padding) * 4);
+  font-size: 1.25em;
   line-height: 1.2em;
-  margin-top: calc(-0.4 * var(--padding));
 }
 .highlight {
   font-style: italic;
   font-weight: 500;
   position: relative;
+  white-space: nowrap;
 }
 .highlight:before {
   height: var(--highlight-height);
@@ -68,9 +70,10 @@ a {
 .content {
   padding-top: calc(0.7 * var(--padding));
 }
-  #overview .content {
+  #overview .summary {
     column-gap: 0;
-    column-count: 2;
+    column-count: 3;
+    clear: both;
   }
 
 
@@ -83,8 +86,12 @@ a {
   font-size: 4.5em;
   line-height: 0.9em;
   padding-top: calc(var(--padding) / 2);
-  margin-left: -0.05em;
 }
+  #overview .title {
+    font-size: 5.2em;
+    line-height: .85em;
+    margin-bottom: calc(var(--padding) * 0.5);
+  }
 
 .row {
   display: flex;
@@ -170,7 +177,21 @@ body.loading #loader {
     --line-height: 22px;
     --padding: 12px;
   }
-  #overview .content {
+  #blurb {
+    margin-top: calc(var(--padding) * 0.5);
+    margin-bottom: calc(var(--padding) * 0.5);
+  }
+  .summary:before {
+    width: 40px;
+    height: 1px;
+    content: "";
+    display: block;
+    margin: 16px 0 12px 0;
+  }
+  #overview .summary:before {
+    background: var(--color);
+  }
+  #overview .summary {
     column-count: 1;
   }
   .title {
@@ -182,13 +203,16 @@ body.loading #loader {
     padding-top: 0;
   }
   .summary {
-    font-size: 2em;
+    font-size: 1.8em;
     line-height: 1.2em;
   }
   .row {
     flex-direction: column;
   }
   .entries {
+    display: none;
+  }
+  .mobile-hide {
     display: none;
   }
 }
