@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Sheets API Quickstart</title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <p>Google Sheets API Quickstart</p>
+
+    <!--Add buttons to initiate auth sequence and sign out-->
+    <button id="authorize_button" style="display: none;">Authorize</button>
+    <button id="signout_button" style="display: none;">Sign Out</button>
+
+    <pre id="content" style="white-space: pre-wrap;"></pre>
+
+    <script type="text/javascript">
+      // Client ID and API key from the Developer Console
+      var CLIENT_ID = '1046024617356-ioavjhaqk5ddlgr0i8ciqkbcc2al47jd.apps.googleusercontent.com';
+      var SHEET_API_KEY = 'AIzaSyBn9J_Ahagc-3qnFdN6rE73O6QTujz1P8o';
+      const SHEET_ID = '1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw'
+
+const sheetURL = (sheetId) => {
+  return `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}?key=${SHEET_API_KEY}`
+}
+
+const sheetRowsURL = (sheetId, sheetName) => {
+  let encodedSheetName = encodeURIComponent(sheetName)
+  return `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodedSheetName}?key=${SHEET_API_KEY}`
+}
+
+const fetchTabs = () => {
+  return fetch(sheetURL(SHEET_ID))
+    .then(response => response.json())
+    .then(json => {
+      let tabs = {}
+      for (let sheet of json.sheets) {
+        if (sheet.properties) {
+          let name = sheet.properties.title
+          tabs[name] = sheet.properties
+        }
+      }
+      return tabs
+    })
+}
+
+/// @param sheetName String, name of the tab to fetch.
+/// @param headerNormalizer Function, takes a header name and normalize it into a key. Default _.camelCase.
+const fetchRows = (sheetName) => {
+  return fetch(sheetRowsURL(SHEET_ID, sheetName))
+    .then(response => response.json())
+    .then(json => {
+      console.log(json);
+      
+    })
+    .catch(err => {
+      console.error(err)
+      return []
+    })
+
+
+}
+
+const handleClientLoad = () => {
+  console.log('handleClientLoad');
+  fetchRows('Sheet1')
+      .then(data => {
+        console.log(data);
+        // return createTokyoDataset(data)
+      })
+}
+
+    </script>
+
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+  </body>
+</html>
