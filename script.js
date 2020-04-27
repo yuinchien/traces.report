@@ -31,30 +31,36 @@ function create(data) {
 
 	let content = document.getElementById('content');
 
-	for(let key in travelYears) {
+	for(let year in travelYears) {
 		let div = document.createElement("div");
-		div.setAttribute("id", "year-"+key);
-		div.classList.add("year");
-		div.innerHTML = `<div class="title">'${key.substring(2)}</div><div class="row"><div id="summary-${key}" class="summary"></div><div id="entries-${key}" class="entries"></div></div>`;
 		content.prepend(div);
-		let summary = document.getElementById("summary-"+key);
-		let sortedTimeInCity = sortOnKeys( travelYears[key].timeInCity );
+		const markup = `
+			<div id="year-${year}" class="year">
+				<div class="title">'${year.substring(2)}</div>
+				<div class="row">
+					<div id="summary-${year}" class="summary"></div>
+					<div id="entries-${year}" class="entries"></div>
+				</div>
+			</div>
+		`;
+		div.outerHTML = markup;
+
+		let summary = document.getElementById("summary-"+year);
+		let sortedTimeInCity = sortOnKeys( travelYears[year].timeInCity );
 		for(let i=0; i<sortedTimeInCity.length; i++) {
-			let data = sortedTimeInCity[i];
-			let div = document.createElement("div");
-			div.classList.add("list");
-			div.innerHTML = `${data[0].split(',')[0].trim()}<span class="days">${data[1]}d</span>`;
-			summary.appendChild(div);
+			let timeInCity = sortedTimeInCity[i];
+			let divList = document.createElement("div");
+			summary.appendChild(divList);
+			divList.outerHTML = `<div class="list">${timeInCity[0].split(',')[0].trim()}<span class="days">${timeInCity[1]}d</span></div>`;
 		}
 	}
 	for(let i=rows.length-1; i>=0; i--) {
 		let year = rows[i][0].substring(rows[i][0].length-4);
 		let parent = document.getElementById("entries-"+year);
 		let entry = document.createElement("div");
-		entry.classList.add('entry');
-		let date = rows[i][0].substring(0, rows[i][0].length-5);
-		entry.innerHTML = `<span class="date">${date}</span>${rows[i][1]}`;
 		parent.appendChild(entry);
+		let date = rows[i][0].substring(0, rows[i][0].length-5);
+		entry.outerHTML = `<div class="entry"><span class="date">${date}</span>${rows[i][1]}</div>`;
 	}
 
 	let totalTimeSpent = {};
