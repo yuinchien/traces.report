@@ -79,6 +79,7 @@ a {
   font-size: 4.5em;
   line-height: 0.9em;
   padding-top: var(--padding);
+  margin-left: -0.05em;
 }
 
 .row {
@@ -168,21 +169,19 @@ body.loading #loader {
   #overview .content {
     column-count: 1;
   }
-  #overview .title {
-    position: relative;
-    float: none;
-  }
-  #overview .content {
-    padding-top: calc(0.25 * var(--padding));
-  }
   .title {
-    font-size: 4.25em;
-    line-height: .9em;
+    font-size: 4.2em;
   }
   .row {
     flex-direction: column;
   }
   .entries {
     margin-top: calc(var(--padding) / 4);
+  }
+}
+
+@media (max-width: 420px) {
+  .title {
+    font-size: 3.2em;
   }
 }

@@ -3,10 +3,12 @@ var CLIENT_ID = '1046024617356-ioavjhaqk5ddlgr0i8ciqkbcc2al47jd.apps.googleuserc
 var SHEET_API_KEY = 'AIzaSyBn9J_Ahagc-3qnFdN6rE73O6QTujz1P8o';
 
 const urlParams = new URLSearchParams(window.location.search);
-const SHEET_ID = urlParams.get('id') || "1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw";
-if(urlParams.get('id')==null) {
-	window.location.search = `id=${SHEET_ID}`;
-}
+// const SHEET_ID = urlParams.get('id') || "1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw";
+// if(urlParams.get('id')==null) {
+// 	window.location.search = `id=${SHEET_ID}`;
+// }
+
+const SHEET_ID = "1gymcYHZnSsnyLJbeLsDf3idC74RJPWJ6CvAQklKdD-A";
 
 const sheetURL = (sheetId) => {
 	return `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}?key=${SHEET_API_KEY}`
@@ -154,7 +156,7 @@ const create = (data) => {
 			let timeInCity = sortedTimeInCity[i];
 			let divList = document.createElement("div");
 			summary.appendChild(divList);
-			divList.outerHTML = `<div class="list">${timeInCity[0].split(',')[0].trim()}<span class="days">${timeInCity[1]}d</span></div>`;
+			divList.outerHTML = `<div class="list">${timeInCity[0].split(',')[0].trim()}<span class="days">${timeInCity[1]}</span></div>`;
 		}
 	}
 	for(let i=rows.length-1; i>=0; i--) {
@@ -203,7 +205,7 @@ const create = (data) => {
 		let days = totalTimeSpent[i][1];
 		let div = document.createElement("div");
 		div.classList.add("list");
-		div.innerHTML = `${city.split(',')[0].trim()}<span class="days">${days}d</span>`;
+		div.innerHTML = `${city.split(',')[0].trim()}<span class="days">${days}</span>`;
 		summary.appendChild(div);
 	}
 
