@@ -36,9 +36,6 @@ a {
   font-style: italic;
   font-weight: 500;
 }
-.clear {
-  clear: both;
-}
 
 .row {
   display: flex;
