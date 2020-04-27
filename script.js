@@ -1,3 +1,8 @@
+const now = new Date();
+if(now.getHours()>=18 || now.getHours()<6) {
+	document.body.classList.add('dark');
+}
+
 // Client ID and API key from the Developer Console
 var CLIENT_ID = '1046024617356-ioavjhaqk5ddlgr0i8ciqkbcc2al47jd.apps.googleusercontent.com';
 var SHEET_API_KEY = 'AIzaSyBn9J_Ahagc-3qnFdN6rE73O6QTujz1P8o';

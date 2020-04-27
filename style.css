@@ -2,6 +2,8 @@
   --margin: 60px;
   --color: #222;
   --bg: #fff;
+  --highlight: #FFE800;
+  --highlight-height: 6px;
   --opacity-low: 0.5;
   --padding: 32px;
   --font-size: 24px;
@@ -22,6 +24,8 @@ body.dark {
   --color: #fafafa;
   --bg: #000;
   --opacity-low: 0.4;
+  --highlight: #FFE900;
+  --highlight-height: 2px;
 }
 
 * {
@@ -46,14 +50,14 @@ a {
   position: relative;
 }
 .highlight:before {
-  height: 6px;
+  height: var(--highlight-height);
   position: absolute;
   z-index: -1;
   left: 0px;
   right: 0px;
   bottom: 4px;
   content: "";
-  background: #FFE800;
+  background: var(--highlight);
 }
 
 .section {
@@ -172,7 +176,7 @@ body.loading #loader {
   .title {
     font-size: 5em;
     float: none;
-    text-shadow: 0 0 8px rgba(255,255,255,1);
+    text-shadow: 0 0 8px var(--bg);
   }
   .content {
     padding-top: 0;
