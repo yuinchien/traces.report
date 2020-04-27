@@ -3,12 +3,10 @@ var CLIENT_ID = '1046024617356-ioavjhaqk5ddlgr0i8ciqkbcc2al47jd.apps.googleuserc
 var SHEET_API_KEY = 'AIzaSyBn9J_Ahagc-3qnFdN6rE73O6QTujz1P8o';
 
 const urlParams = new URLSearchParams(window.location.search);
-// const SHEET_ID = urlParams.get('id') || "1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw";
-// if(urlParams.get('id')==null) {
-// 	window.location.search = `id=${SHEET_ID}`;
-// }
-
-const SHEET_ID = "1gymcYHZnSsnyLJbeLsDf3idC74RJPWJ6CvAQklKdD-A";
+const SHEET_ID = urlParams.get('id') || "1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw";
+if(urlParams.get('id')==null) {
+	window.location.search = `id=${SHEET_ID}`;
+}
 
 const sheetURL = (sheetId) => {
 	return `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}?key=${SHEET_API_KEY}`
