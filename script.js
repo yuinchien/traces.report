@@ -207,7 +207,15 @@ const create = (data) => {
 		summary.appendChild(div);
 	}
 
-	console.log(`Lived in ${Object.keys(countries).length} countries, ${Object.keys(totalTimeSpent).length} cities.`);
+	let blurb = document.createElement("div");
+	sections.prepend(blurb);
+	const markupBlurb = `
+		<div id="blurb">
+			<div>Visited <span class="highlight">${Object.keys(countries).length} countries</span> & <span class="highlight">${Object.keys(totalTimeSpent).length} cities</span>.</div>
+			<div>Current location <span class="highlight">${rows[rows.length-1][1]}, ${rows[rows.length-1][2]}</span>.</div>
+		</div>
+	`;
+	blurb.outerHTML = markupBlurb;
 
 	document.body.classList.remove('loading');
 }

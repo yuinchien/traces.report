@@ -3,7 +3,7 @@
   --color: #222;
   --bg: #fff;
   --opacity-low: 0.5;
-  --padding: 32px;
+  --padding: 24px;
   --font-size: 24px;
   --line-height: 26px;
 }
@@ -35,38 +35,23 @@ a {
   text-decoration: none;
 }
 
-#copy {
-  margin-bottom: 1em;
+#blurb {
+  padding-bottom: calc(1 * var(--padding));
+  line-height: 1.2em;
+  /* padding-top: calc(0.5 * var(--padding)); */
 }
-#copy .highlight {
+.highlight {
   font-style: italic;
   font-weight: 500;
   position: relative;
 }
-#copy .highlight:before {
-  height: 2px;
+.highlight:before {
+  height: 6px;
   position: absolute;
   z-index: -1;
   left: 0px;
   right: 0px;
-  bottom: 2px;
-  content: "";
-  background: #FFE800;
-}
-#copy .city,
-#copy .time {
-  font-style: italic;
-  font-weight: 500;
-  position: relative;
-}
-#copy .city:before,
-#copy .time:before {
-  height: 2px;
-  position: absolute;
-  z-index: -1;
-  left: 0px;
-  right: 0px;
-  bottom: 2px;
+  bottom: 4px;
   content: "";
   background: #FFE800;
 }
@@ -76,10 +61,6 @@ a {
   border-top: 1px solid var(--color);
   margin-bottom: calc(2.5 * var(--padding));
 }
-  #overview {
-    border-top: none;
-  }
-
 .content {
   padding-top: calc(1.25 * var(--padding));
 }
@@ -188,11 +169,11 @@ body.loading #loader {
     column-count: 1;
   }
   #overview .title {
+    position: relative;
     float: none;
-    width: 100%;
-    background: var(--bg);
-    border-bottom: 1px solid var(--color);
-    padding-bottom: calc(var(--padding) * 1.5);
+  }
+  #overview .content {
+    padding-top: calc(0.25 * var(--padding));
   }
   .title {
     font-size: 4.25em;
