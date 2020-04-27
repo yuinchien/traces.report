@@ -134,40 +134,34 @@ const fetchRows = (sheetName) => {
 			let travelYears = {};
 			for(let i=0; i<rows.length; i++) {
 				let city = `${rows[i][1].trim()}, ${rows[i][2].trim()}`;
-				let date = rows[i][0];
-				let d = new Date(date);
-				let y = d.getFullYear();
+				let date = new Date(rows[i][0]);
+				let year = date.getFullYear();
 				try {
-					let nextEntryD = new Date();
-					if(i!=rows.length-1) {
-						nextEntryD = new Date( rows[i+1][0] );
-					}
-					let totalDays = 0;
-					if(d.getFullYear()!=nextEntryD.getFullYear()) {
-						let gapDays = daysBetweenInSameYear( new Date(nextEntryD.getFullYear(), 0, 1), nextEntryD);
-						if(!travelYears[nextEntryD.getFullYear()]) {
-							travelYears[nextEntryD.getFullYear()] = new TravelYear(nextEntryD.getFullYear());
+					let nextDate = (i!=rows.length-1)? new Date( rows[i+1][0] ): new Date();
+					let nextYear = nextDate.getFullYear();
+					let yearDiff = nextYear - year;
+					if(yearDiff!=0) {
+						let gapDays = daysBetweenInSameYear( new Date(nextYear, 0, 1), nextDate);
+						if(!travelYears[nextYear]) {
+							travelYears[nextYear] = new TravelYear(nextYear);
 						}
-						if((d.getFullYear() - nextEntryD.getFullYear()) != -1) {
-							let diff = nextEntryD.getFullYear() - d.getFullYear();
-							for(let j=1; j<diff; j++) {
-								let middleYear = d.getFullYear() + j;
+						if(yearDiff != 1) {
+							for(let j=1; j<yearDiff; j++) {
+								let middleYear = year + j;
 								if(!travelYears[middleYear]) {
 									travelYears[middleYear] = new TravelYear(middleYear);
 								}
 								travelYears[middleYear].updateTimeInCity(city, 365);
 							}
 						}
-						travelYears[nextEntryD.getFullYear()].updateTimeInCity(city, gapDays);
-						nextEntryD = new Date(d.getFullYear(), 11, 31, 23, 59);
-						totalDays = gapDays;
+						travelYears[nextYear].updateTimeInCity(city, gapDays);
+						nextDate = new Date(year, 11, 31, 23, 59);
 					}
-					let days = daysBetweenInSameYear(d, nextEntryD);
-					if(!travelYears[y]) {
-						travelYears[y] = new TravelYear(y);
+					let days = daysBetweenInSameYear(date, nextDate);
+					if(!travelYears[year]) {
+						travelYears[year] = new TravelYear(year);
 					}
-					travelYears[y].updateTimeInCity(city, days);
-					totalDays += days;
+					travelYears[year].updateTimeInCity(city, days);
 				} catch(e) {
 					console.error(e)
 				}
@@ -184,10 +178,18 @@ const fetchRows = (sheetName) => {
 }
 
 const handleClientLoad = () => {
-	console.log('handleClientLoad');
-	fetchRows('Sheet1')
+	fetchTabs()
 		.then(data => {
-			console.log('dataReady', data);
-			create(data);
+			var sheetName = "";
+			for(title in data) {
+				if(data[title].index==0) {
+					sheetName = data[title].title;
+					break;
+				}
+			}
+			fetchRows(sheetName)
+				.then(data => {
+					create(data);
+				})
 		})
 }
