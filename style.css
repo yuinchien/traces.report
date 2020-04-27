@@ -59,7 +59,7 @@ a {
 .section {
   clear: both;
   border-top: 1px solid var(--color);
-  margin-bottom: calc(2.5 * var(--padding));
+  margin-bottom: calc(0.75 * var(--padding));
 }
 .content {
   padding-top: calc(0.7 * var(--padding));
@@ -170,18 +170,21 @@ body.loading #loader {
     column-count: 1;
   }
   .title {
-    font-size: 4.2em;
+    font-size: 5em;
+    float: none;
+    text-shadow: 0 0 8px rgba(255,255,255,1);
+  }
+  .content {
+    padding-top: 0;
+  }
+  .summary {
+    font-size: 2em;
+    line-height: 1.2em;
   }
   .row {
     flex-direction: column;
   }
   .entries {
-    margin-top: calc(var(--padding) / 4);
-  }
-}
-
-@media (max-width: 420px) {
-  .title {
-    font-size: 3.2em;
+    display: none;
   }
 }
