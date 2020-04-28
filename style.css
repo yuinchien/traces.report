@@ -8,6 +8,7 @@
   --padding: 32px;
   --font-size: 24px;
   --line-height: 26px;
+  --gradient: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.8) 15%), linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 60%);
 }
 
 body {
@@ -26,6 +27,8 @@ body.dark {
   --opacity-low: 0.4;
   --highlight: #FFE900;
   --highlight-height: 2px;
+  --color-digit: 255;
+  --gradient: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.6) 15%), linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 80%);
 }
 
 * {
@@ -197,7 +200,22 @@ body.loading #loader {
   .title {
     font-size: 5em;
     float: none;
-    text-shadow: 0 0 8px var(--bg);
+    width: 100%;
+    text-shadow: 0 0 6px var(--bg), 0 0 12px var(--bg);
+  }
+  .content {
+    margin-top: 60px;
+  }
+  .title:after {
+    position: absolute;
+    content: "";
+    display: block;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: -20px;
+    z-index: -1;
+    background: var(--gradient);
   }
   .content {
     padding-top: 0;
