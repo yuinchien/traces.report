@@ -15,6 +15,8 @@ Take following steps to create your own site:
 ![alt text](https://traces.report/screenshots/sheet.png "Screenshot")
 4. That's it! 
 
+––––
 
+I've been keeping travel records in a Google Spreadsheet for many years, and this project has evolved over time. The current design enables me to reflect on my personal history and the relationship with different places I've lived, visited and left. It was a lovely surprise to open source the project, I hope more people can enjoy it like I have.
 
 Created with Google Sheets API, and a habit of keeping records. This is a personal [project](https://yuinchien.com/travel-log/) of [Yuin](https://yuinchien.com/).
