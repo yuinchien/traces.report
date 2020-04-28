@@ -7,12 +7,12 @@ if(now.getHours()>=18 || now.getHours()<6) {
 var CLIENT_ID = '1046024617356-ioavjhaqk5ddlgr0i8ciqkbcc2al47jd.apps.googleusercontent.com';
 var SHEET_API_KEY = 'AIzaSyBn9J_Ahagc-3qnFdN6rE73O6QTujz1P8o';
 
-// const urlParams = new URLSearchParams(window.location.search);
-// const SHEET_ID = urlParams.get('id') || "1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw";
-// if(urlParams.get('id')==null) {
-// 	window.location.search = `id=${SHEET_ID}`;
-// }
-const SHEET_ID = "1gymcYHZnSsnyLJbeLsDf3idC74RJPWJ6CvAQklKdD-A";
+const urlParams = new URLSearchParams(window.location.search);
+const SHEET_ID = urlParams.get('id') || "1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw";
+if(urlParams.get('id')==null) {
+	window.location.search = `id=${SHEET_ID}`;
+}
+// const SHEET_ID = "1gymcYHZnSsnyLJbeLsDf3idC74RJPWJ6CvAQklKdD-A";
 
 const sheetURL = (sheetId) => {
 	return `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}?key=${SHEET_API_KEY}`
@@ -81,7 +81,7 @@ const fetchRows = (sheetName) => {
 			return {
 				rows: rows,
 				travelYears: travelYears,
-				username: sheetName=="Sheet1"?"Hello":sheetName
+				username: sheetName=="Sheet1"?"":sheetName
 			};
 		})
 		.catch(err => {
@@ -203,6 +203,10 @@ const createOverview = (data) => {
 		<div id="overview" class="section">
 			<div class="title">${duration}</div>
 			<div class="content" id="content-overview">
+				<div id="blurb">
+					<div>Visited <span class="highlight">${Object.keys(countries).length} countries</span> & <span class="highlight">${Object.keys(totalTimeSpent).length} cities</span>.</div>
+					<div>Currently in <span class="highlight">${rows[rows.length-1][1]}</span><span class="mobile-hide">, <span class="highlight">${rows[rows.length-1][2]}</span></span>.</div>
+				</div>
 				<div class="summary" id="summary-overview"></div>
 			</div>
 		</div>
@@ -220,16 +224,11 @@ const createOverview = (data) => {
 		summary.appendChild(div);
 	}
 
-	let info = document.createElement("div");
-	sections.prepend(info);
-	const markupInfo = `
-		<div class="section" id="section-info">
-			<div id="username"><span class="highlight">${username}.</span></div>
-			<div id="blurb">
-				<div>Visited <span class="highlight">${Object.keys(countries).length} countries</span> & <span class="highlight">${Object.keys(totalTimeSpent).length} cities</span>.</div>
-				<div>Currently in <span class="highlight">${rows[rows.length-1][1]}</span><span class="mobile-hide">, <span class="highlight">${rows[rows.length-1][2]}</span></span>.</div>
-			</div>
-		</div>
-	`;
-	info.outerHTML = markupInfo;
+	if(username.length>0) {
+		let info = document.createElement("div");
+		sections.prepend(info);
+		const markupInfo = `<div id="username"><span class="highlight">${username}.</span></div>`;
+		info.outerHTML = markupInfo;		
+	}
+
 }

@@ -100,26 +100,25 @@ a {
   display: flex;
   padding: calc(var(--padding) * 0.75) 0 0 0;
 }
-  #username {
-    flex: 1;
 
-  }
+#username {
+  text-align: center;
+  margin-bottom: var(--padding);
+}
   #username .highlight {
     font-weight: 700;
   }
-  #blurb {
-    flex: 2;
-  }
+
 
 #overview {
   font-family: 'EB Garamond';
 }
+#blurb {
+  font-size: 1.2em;
+  line-height: 1.2em;
+  margin: calc(var(--padding) * 0.25) 0 120px 0;
+}
 
-/* #blurb { */
-  /* margin-top: calc(var(--padding) * 0.15); */
-  /* font-size: 1.2em;
-  line-height: 1.2em; */
-/* } */
 .highlight {
   font-style: italic;
   font-weight: 500;
@@ -161,11 +160,9 @@ a {
   line-height: 0.9em;
   padding-top: calc(var(--padding) / 2);
 }
-  /* #overview .title {
-    font-size: 5.2em;
-    line-height: .85em;
+  #overview .title {
     margin-bottom: calc(var(--padding) * 0.5);
-  } */
+  }
 
 .row {
   display: flex;
@@ -259,7 +256,16 @@ body.loading #loader {
     line-height: 1.2em;
   }
   #blurb {
-    margin-top: 6px;
+    margin-top: 4px;
+    margin-bottom: calc(var(--padding) * 0.75);
+  }
+  #blurb:after {
+    content: "";
+    height: 1px;
+    width: 40px;
+    background: var(--color);
+    display: block;
+    margin-top: 20px;
   }
   #overview .summary {
     column-count: 1;
@@ -284,7 +290,7 @@ body.loading #loader {
   }
   .content {
     padding-top: 0;
-    margin-top: 40px;
+    margin-top: 12px;
   }
   .summary {
     font-size: 1.8em;
