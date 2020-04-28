@@ -195,7 +195,7 @@ body.loading #loader {
   }
   #overview .summary {
     column-count: 1;
-    padding-top: 16px;
+    padding-top: 0px;
   }
   .title {
     font-size: 5em;
@@ -223,7 +223,7 @@ body.loading #loader {
   .summary {
     font-size: 1.8em;
     line-height: 1.2em;
-    padding-top: 16px;
+    padding-top: 0px;
   }
   .row {
     flex-direction: column;
