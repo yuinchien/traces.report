@@ -7,7 +7,7 @@ Take following steps to create your own site:
 2. Change the share permission to **Anyone who has the link can view**:<br>
   **Share** > **Advance** > **Change...** > **On - Anyone with the link** > **Save**
 ![alt text](https://traces.report/screenshots/share.png "Screenshot")
-3. Find the **Google spreadsheet ID** and replace it in url(see screenshot below):<br>
+3. Find the **Google spreadsheet ID** and replace it in url(see screenshots below):<br>
  [https://traces.report/?id=1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw](https://traces.report/?id=1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw)
 ![alt text](https://traces.report/screenshots/sheet_url.png "Screenshot")
 ![alt text](https://traces.report/screenshots/site1.png "Screenshot")
