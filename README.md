@@ -17,4 +17,4 @@ Take following steps to create your own site:
 
 
 
-A personal [project](https://yuinchien.com/travel-log/) of [Yuin](https://yuinchien.com/).
+Created with Google Sheets API, and a habit of keeping records. This is a personal [project](https://yuinchien.com/travel-log/) of [Yuin](https://yuinchien.com/).
