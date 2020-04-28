@@ -7,12 +7,12 @@ if(now.getHours()>=18 || now.getHours()<6) {
 var CLIENT_ID = '1046024617356-ioavjhaqk5ddlgr0i8ciqkbcc2al47jd.apps.googleusercontent.com';
 var SHEET_API_KEY = 'AIzaSyBn9J_Ahagc-3qnFdN6rE73O6QTujz1P8o';
 
-const urlParams = new URLSearchParams(window.location.search);
-const SHEET_ID = urlParams.get('id') || "1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw";
-if(urlParams.get('id')==null) {
-	window.location.search = `id=${SHEET_ID}`;
-}
-// const SHEET_ID = "1gymcYHZnSsnyLJbeLsDf3idC74RJPWJ6CvAQklKdD-A";
+// const urlParams = new URLSearchParams(window.location.search);
+// const SHEET_ID = urlParams.get('id') || "1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw";
+// if(urlParams.get('id')==null) {
+// 	window.location.search = `id=${SHEET_ID}`;
+// }
+const SHEET_ID = "1gymcYHZnSsnyLJbeLsDf3idC74RJPWJ6CvAQklKdD-A";
 
 const sheetURL = (sheetId) => {
 	return `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}?key=${SHEET_API_KEY}`
@@ -80,29 +80,13 @@ const fetchRows = (sheetName) => {
 			}
 			return {
 				rows: rows,
-				travelYears: travelYears
+				travelYears: travelYears,
+				username: sheetName=="Sheet1"?"":sheetName
 			};
 		})
 		.catch(err => {
 			console.error(err)
 			return []
-		})
-}
-
-const handleClientLoad = () => {
-	fetchTabs()
-		.then(data => {
-			var sheetName = "";
-			for(title in data) {
-				if(data[title].index==0) {
-					sheetName = data[title].title;
-					break;
-				}
-			}
-			fetchRows(sheetName)
-				.then(data => {
-					create(data);
-				})
 		})
 }
 
@@ -134,10 +118,38 @@ const sortOnKeys = (dict) => {
 	return sortable;
 }
 
+const getTotalTimeSpent = (travelYears) => {
+	let totalTimeSpent = {};
+	for(let key in travelYears) {
+		for(let city in travelYears[key].timeInCity) {
+			var country = city.split(',')[1].trim();
+			if(!totalTimeSpent[city]) {
+				totalTimeSpent[city] = 0;
+			}
+			totalTimeSpent[city] += travelYears[key].timeInCity[city];
+		}
+	}
+	totalTimeSpent = sortOnKeys( totalTimeSpent );
+	return totalTimeSpent;
+}
+
+const getCountries = (travelYears) => {
+	let countries = {};
+	for(let key in travelYears) {
+		for(let city in travelYears[key].timeInCity) {
+			var country = city.split(',')[1].trim();
+			if(!countries[country]) {
+				countries[country] = 1;
+			}
+		}
+	}
+	return countries;
+}
+
 const create = (data) => {
 	let rows = data.rows;
 	let travelYears = data.travelYears;
-
+	let username = data.username;
 	let sections = document.getElementById('sections');
 
 	for(let year in travelYears) {
@@ -171,26 +183,20 @@ const create = (data) => {
 		let date = rows[i][0].substring(0, rows[i][0].length-5);
 		entry.outerHTML = `<div class="entry"><span class="date">${date}</span>${rows[i][1]}</div>`;
 	}
+}
 
-	let totalTimeSpent = {};
-	let countries = {};
-	for(let key in travelYears) {
-		for(let city in travelYears[key].timeInCity) {
-			var country = city.split(',')[1].trim();
-			if(!totalTimeSpent[city]) {
-				totalTimeSpent[city] = 0;
-			}
-			if(!countries[country]) {
-				countries[country] = 1;
-			}
-			totalTimeSpent[city] += travelYears[key].timeInCity[city];
-		}
-	}
+const createOverview = (data) => {
+	let rows = data.rows;
+	let travelYears = data.travelYears;
+	let username = data.username;
+	let sections = document.getElementById('sections');
+
+	const totalTimeSpent = getTotalTimeSpent(travelYears);
+	const countries = getCountries(travelYears);
 
 	let yearArray = Object.keys(travelYears).sort();
 	let duration = `'${yearArray[0].substring(2)}–<br>'${yearArray[yearArray.length-1].substring(2)}`;
 
-	totalTimeSpent = sortOnKeys( totalTimeSpent );
 	let overview = document.createElement("div");
 	sections.prepend(overview);
 	const markupOverview = `
@@ -203,8 +209,9 @@ const create = (data) => {
 	`;
 	overview.outerHTML = markupOverview;
 
+	let total = Math.min(totalTimeSpent.length, 16);
 	const summary = document.getElementById("summary-overview");
-	for(let i=0; i<totalTimeSpent.length; i++) {
+	for(let i=0; i<total; i++) {
 		let city = totalTimeSpent[i][0];
 		let days = totalTimeSpent[i][1];
 		let div = document.createElement("div");
@@ -213,16 +220,16 @@ const create = (data) => {
 		summary.appendChild(div);
 	}
 
-	const contentOverview = document.getElementById("content-overview");
-	let blurb = document.createElement("div");
-	contentOverview.prepend(blurb);
-	const markupBlurb = `
-		<div id="blurb">
-			<div>Visited <span class="highlight">${Object.keys(countries).length} countries</span> & <span class="highlight">${Object.keys(totalTimeSpent).length} cities</span>.</div>
-			<div>Currently in <span class="highlight">${rows[rows.length-1][1]}<span class="mobile-hide">, ${rows[rows.length-1][2]}</span></span>.</div>
+	let info = document.createElement("div");
+	sections.prepend(info);
+	const markupInfo = `
+		<div class="section" id="section-info">
+			<div id="username"><span class="highlight">${username}.</span></div>
+			<div id="blurb">
+				<div>Visited <span class="highlight">${Object.keys(countries).length} countries</span> & <span class="highlight">${Object.keys(totalTimeSpent).length} cities</span>.</div>
+				<div>Currently in <span class="highlight">${rows[rows.length-1][1]}</span><span class="mobile-hide">, <span class="highlight">${rows[rows.length-1][2]}</span></span>.</div>
+			</div>
 		</div>
 	`;
-	blurb.outerHTML = markupBlurb;
-
-	document.body.classList.remove('loading');
+	info.outerHTML = markupInfo;
 }

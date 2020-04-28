@@ -30,6 +30,26 @@
     <div id="footer">An open source <a href="https://github.com/yuinchien/log">project</a> by <a href="https://yuinchien.com/">Yuin</a>.</div>
   </div>
   <script src="script.js"></script>
+  <script>
+  const handleClientLoad = () => {
+  	fetchTabs()
+  		.then(data => {
+  			var sheetName = "";
+  			for(title in data) {
+  				if(data[title].index==0) {
+  					sheetName = data[title].title;
+  					break;
+  				}
+  			}
+  			fetchRows(sheetName)
+  				.then(data => {
+  					create(data);
+            createOverview(data);
+            document.body.classList.remove('loading');
+  				})
+  		})
+  }
+  </script>
   <script async defer src="https://apis.google.com/js/api.js"
     onload="this.onload=function(){};handleClientLoad()"
     onreadystatechange="if (this.readyState === 'complete') this.onload()">

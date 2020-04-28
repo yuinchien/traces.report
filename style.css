@@ -1,14 +1,68 @@
+/* latin */
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ebgaramond/v13/SlGUmQSNjdsmc35JDF1K5GR1SDk_YAPI.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin */
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ebgaramond/v13/SlGWmQSNjdsmc35JDF1K5GRweDs1ZyHKpWg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* latin */
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ebgaramond/v13/SlGUmQSNjdsmc35JDF1K5GR1SDk_YAPI.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* latin */
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ebgaramond/v13/SlGWmQSNjdsmc35JDF1K5GRweDs1ZyHKpWg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin */
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ebgaramond/v13/SlGUmQSNjdsmc35JDF1K5GR1SDk_YAPI.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
 :root {
   --margin: 60px;
   --color: #222;
   --bg: #fff;
   --highlight: #FFE800;
-  --highlight-height: 6px;
+  --highlight-height: 4px;
   --opacity-low: 0.5;
   --padding: 32px;
   --font-size: 24px;
   --line-height: 26px;
   --gradient: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.8) 15%), linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 60%);
+}
+
+@font-face {
+  font-family: 'EB Garamond';
+  src: url(sansation_light.woff);
 }
 
 body {
@@ -42,12 +96,30 @@ a {
   text-decoration: none;
 }
 
-#blurb {
-  margin-top: calc(var(--padding) * 0.15);
-  /* margin-bottom: calc(var(--padding) * 2); */
-  font-size: 1.25em;
-  line-height: 1.2em;
+#section-info {
+  display: flex;
+  padding: calc(var(--padding) * 0.75) 0 0 0;
 }
+  #username {
+    flex: 1;
+
+  }
+  #username .highlight {
+    font-weight: 700;
+  }
+  #blurb {
+    flex: 2;
+  }
+
+#overview {
+  font-family: 'EB Garamond';
+}
+
+/* #blurb { */
+  /* margin-top: calc(var(--padding) * 0.15); */
+  /* font-size: 1.2em;
+  line-height: 1.2em; */
+/* } */
 .highlight {
   font-style: italic;
   font-weight: 500;
@@ -76,9 +148,8 @@ a {
   #overview .summary {
     column-gap: 0;
     column-count: 2;
-    padding-top: 160px;
+    /* padding-top: 160px */
   }
-
 
 .title {
   position: sticky;
@@ -90,11 +161,11 @@ a {
   line-height: 0.9em;
   padding-top: calc(var(--padding) / 2);
 }
-  #overview .title {
+  /* #overview .title {
     font-size: 5.2em;
     line-height: .85em;
     margin-bottom: calc(var(--padding) * 0.5);
-  }
+  } */
 
 .row {
   display: flex;
@@ -108,7 +179,7 @@ a {
 }
 .days {
   font-style: italic;
-  padding: 0 0.25em;
+  padding: 0 0.125em;
   opacity: var(--opacity-low);
 }
 
@@ -171,27 +242,24 @@ body.loading #loader {
   body {
     --font-size: 20px;
     --line-height: 24px;
-    --padding: 16px;
+    /* --padding: 24px; */
   }
 }
+
 @media (max-width: 720px) {
   body {
     --font-size: 18px;
     --line-height: 22px;
-    --padding: 12px;
+    --padding: 20px;
+  }
+  #section-info {
+    display: block;
+    padding: 12px 0 0 0;
+    font-size: 1.2em;
+    line-height: 1.2em;
   }
   #blurb {
-    margin-top: calc(var(--padding) * 0.5);
-  }
-  .summary:before {
-    width: 40px;
-    height: 1px;
-    content: "";
-    display: block;
-    margin: 16px 0 12px 0;
-  }
-  #overview .summary:before {
-    background: var(--color);
+    margin-top: 6px;
   }
   #overview .summary {
     column-count: 1;
@@ -216,7 +284,7 @@ body.loading #loader {
   }
   .content {
     padding-top: 0;
-    margin-top: 8px;
+    margin-top: 40px;
   }
   .summary {
     font-size: 1.8em;
