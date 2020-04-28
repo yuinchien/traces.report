@@ -13,5 +13,6 @@ Take following steps to create your own site:
 ![alt text](https://traces.report/screenshots/site1.png "Screenshot")
 ![alt text](https://traces.report/screenshots/site2.png "Screenshot")
 ![alt text](https://traces.report/screenshots/sheet.png "Screenshot")
-4. That's it!
+4. That's it! Hope you enjoy the project.
+
 Checkout the original project [Travel Log](https://yuinchien.com/travel-log/) by [Yuin Chien](https://yuinchien.com/).
