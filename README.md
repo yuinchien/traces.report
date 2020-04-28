@@ -17,4 +17,4 @@ Take following steps to create your own site:
 
 
 
-This is a personal [project](https://yuinchien.com/travel-log/) of [Yuin Chien](https://yuinchien.com/).
+A personal [project](https://yuinchien.com/travel-log/) of [Yuin](https://yuinchien.com/).
