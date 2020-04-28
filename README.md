@@ -6,7 +6,8 @@ An open source sheet-to-site template for personal travel log. 3 steps to create
 3. Find the **Google spreadsheet ID** and replace it in url(see screenshot below): [https://yuinchien.com/log/?id=1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw](https://yuinchien.com/log/?id=1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw)
 
 ![alt text](https://yuinchien.com/log/screenshots/sheet_url.png "Screenshot")
-![alt text](https://yuinchien.com/log/screenshots/site.png "Screenshot")
+![alt text](https://yuinchien.com/log/screenshots/site1.png "Screenshot")
+![alt text](https://yuinchien.com/log/screenshots/site2.png "Screenshot")
 ![alt text](https://yuinchien.com/log/screenshots/sheet.png "Screenshot")
 
 Checkout the original project [Travel Log](https://yuinchien.com/travel-log/) by [Yuin Chien](https://yuinchien.com/).
