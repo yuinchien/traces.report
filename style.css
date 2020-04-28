@@ -216,7 +216,7 @@ body.loading #loader {
   }
   .content {
     padding-top: 0;
-    margin-top: 40px;
+    margin-top: 8px;
   }
   .summary {
     font-size: 1.8em;
