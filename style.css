@@ -203,9 +203,6 @@ body.loading #loader {
     width: 100%;
     text-shadow: 0 0 6px var(--bg), 0 0 12px var(--bg);
   }
-  .content {
-    margin-top: 60px;
-  }
   .title:after {
     position: absolute;
     content: "";
@@ -219,6 +216,7 @@ body.loading #loader {
   }
   .content {
     padding-top: 0;
+    margin-top: 40px;
   }
   .summary {
     font-size: 1.8em;
