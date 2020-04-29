@@ -183,12 +183,15 @@ body.loading #loader {
   padding: 0;
 }
 
-#screenshot {
-  max-width: 100%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
+#link-github {
+  position: fixed;
   right: 0;
+  bottom: 0;
+  color: var(--color-link);
+  border-radius: 24px;
+  font-weight: 500;
+  padding: 24px var( --padding);
+  z-index: 1000;
 }
 
 body.edit #sections {
