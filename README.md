@@ -26,4 +26,4 @@ Created with Google Sheets API, localStorage and a habit of keeping records. Thi
 
 –––
 
-Special thanks to @liquidx and @jonobr1 for pointing me to the right direction. And friends who brainstorm ideas and names with me! 😊
+Special thanks to @liquidx and @jonobr1 for pointing me to the right direction. And friends who brainstorm ideas and names with me!
