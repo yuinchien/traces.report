@@ -1,5 +1,7 @@
 # traces.report
-This project aims to surface travel patterns that might be hidden and shed new light on the relationship between people and places. 
+This project aims to surface travel patterns that might be hidden and shed new light on the relationship between people and places.
+
+![alt text](https://traces.report/screenshots/site.png "Screenshot")
 
 Take the following steps to create your own site:
 
