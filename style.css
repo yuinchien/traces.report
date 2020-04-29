@@ -178,6 +178,9 @@ body.loading #loader {
   margin-top: 4em;
   max-width: 880px;
 }
+#footer .button {
+  padding: 0;
+}
 
 #screenshot {
   max-width: 100%;
