@@ -7,12 +7,7 @@ if(now.getHours()>=18 || now.getHours()<6) {
 var CLIENT_ID = '1046024617356-ioavjhaqk5ddlgr0i8ciqkbcc2al47jd.apps.googleusercontent.com';
 var SHEET_API_KEY = 'AIzaSyBn9J_Ahagc-3qnFdN6rE73O6QTujz1P8o';
 
-const urlParams = new URLSearchParams(window.location.search);
-const SHEET_ID = urlParams.get('id') || "1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw";
-if(urlParams.get('id')==null) {
-	window.location.search = `id=${SHEET_ID}`;
-}
-// const SHEET_ID = "1gymcYHZnSsnyLJbeLsDf3idC74RJPWJ6CvAQklKdD-A";
+var SAMPLE_SHEET_ID = "1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw";
 
 const sheetURL = (sheetId) => {
 	return `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}?key=${SHEET_API_KEY}`
@@ -23,11 +18,15 @@ const sheetRowsURL = (sheetId, sheetName) => {
 	return `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodedSheetName}?key=${SHEET_API_KEY}`
 }
 
-const fetchTabs = () => {
-	return fetch(sheetURL(SHEET_ID))
+const fetchTabs = (sheetID) => {
+
+	return fetch(sheetURL(sheetID))
 		.then(response => response.json())
 		.then(json => {
 			let tabs = {}
+			if(json.error) {
+				return -1;
+			}
 			for (let sheet of json.sheets) {
 				if (sheet.properties) {
 					let name = sheet.properties.title
@@ -38,8 +37,8 @@ const fetchTabs = () => {
 		})
 }
 
-const fetchRows = (sheetName) => {
-	return fetch(sheetRowsURL(SHEET_ID, sheetName))
+const fetchRows = (sheetID, sheetName) => {
+	return fetch(sheetRowsURL(sheetID, sheetName))
 		.then(response => response.json())
 		.then(json => {
 			let rows = json.values.slice(1).sort((a, b) => (new Date(a[0])).getTime() - (new Date(b[0])).getTime() );
@@ -81,7 +80,6 @@ const fetchRows = (sheetName) => {
 			return {
 				rows: rows,
 				travelYears: travelYears,
-				username: sheetName=="Sheet1"?"":sheetName
 			};
 		})
 		.catch(err => {
@@ -149,7 +147,7 @@ const getCountries = (travelYears) => {
 const create = (data) => {
 	let rows = data.rows;
 	let travelYears = data.travelYears;
-	let username = data.username;
+	// let username = data.username;
 	let sections = document.getElementById('sections');
 
 	for(let year in travelYears) {
@@ -188,7 +186,7 @@ const create = (data) => {
 const createOverview = (data) => {
 	let rows = data.rows;
 	let travelYears = data.travelYears;
-	let username = data.username;
+	// let username = data.username;
 	let sections = document.getElementById('sections');
 
 	const totalTimeSpent = getTotalTimeSpent(travelYears);
@@ -224,11 +222,11 @@ const createOverview = (data) => {
 		summary.appendChild(div);
 	}
 
-	if(username.length>0) {
-		let info = document.createElement("div");
-		sections.prepend(info);
-		const markupInfo = `<div id="username"><span class="highlight">${username}.</span></div>`;
-		info.outerHTML = markupInfo;		
-	}
+	// if(username.length>0) {
+	// 	let info = document.createElement("div");
+	// 	sections.prepend(info);
+	// 	const markupInfo = `<div id="username"><span class="highlight">${username}.</span></div>`;
+	// 	info.outerHTML = markupInfo;
+	// }
 
 }

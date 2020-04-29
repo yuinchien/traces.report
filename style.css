@@ -1,55 +1,7 @@
-/* latin */
-@font-face {
-  font-family: 'EB Garamond';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/ebgaramond/v13/SlGUmQSNjdsmc35JDF1K5GR1SDk_YAPI.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin */
-@font-face {
-  font-family: 'EB Garamond';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/ebgaramond/v13/SlGWmQSNjdsmc35JDF1K5GRweDs1ZyHKpWg.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-/* latin */
-@font-face {
-  font-family: 'EB Garamond';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/ebgaramond/v13/SlGUmQSNjdsmc35JDF1K5GR1SDk_YAPI.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-/* latin */
-@font-face {
-  font-family: 'EB Garamond';
-  font-style: italic;
-  font-weight: 500;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/ebgaramond/v13/SlGWmQSNjdsmc35JDF1K5GRweDs1ZyHKpWg.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin */
-@font-face {
-  font-family: 'EB Garamond';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/ebgaramond/v13/SlGUmQSNjdsmc35JDF1K5GR1SDk_YAPI.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-
 :root {
   --margin: 60px;
   --color: #222;
+  --color-link: #ff6f59;
   --bg: #fff;
   --highlight: #FFE800;
   --highlight-height: 4px;
@@ -58,11 +10,6 @@
   --font-size: 24px;
   --line-height: 26px;
   --gradient: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.8) 15%), linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 60%);
-}
-
-@font-face {
-  font-family: 'EB Garamond';
-  src: url(sansation_light.woff);
 }
 
 body {
@@ -92,7 +39,7 @@ body.dark {
 }
 
 a {
-  color: #ff6f59;
+  color: var(--color-link);
   text-decoration: none;
 }
 
@@ -228,8 +175,87 @@ body.loading #loader {
 }
 
 #footer {
-  margin-top: 2em;
+  margin-top: 4em;
+  max-width: 880px;
 }
+
+#screenshot {
+  max-width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+body.edit #sections {
+  display: none;
+}
+
+body.edit #form {
+  display: flex;
+}
+
+#form {
+  padding: var(--padding);
+  font-family: "Helvetica", sans-serif;
+  font-size: 1.25em;
+  line-height: 1.6em;
+  height: calc(100vh - var(--padding)*2);
+  display: flex;
+  display: none;
+}
+#form .wrapper {
+  max-width: 920px;
+  margin: 0 auto 80px auto;
+  align-self: center;
+}
+#form p {
+  font-size: 1.25em;
+  line-height: 1.2em;
+  padding-right: 60px;
+  margin-top: 0;
+}
+input {
+  background: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #999;
+  font-family: 'Helvetica';
+  font-size: 1em;
+  line-height: 1.6em;
+  width: 100%;
+  color: var(--color);
+}
+input:focus {
+  border-bottom: 2px solid var(--color-link);
+}
+.buttons {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 0.8em;
+}
+.button {
+  cursor: pointer;
+  pointer-events: auto;
+  color: var(--color-link);
+  display: inline-block;
+  padding: 0px 16px 0px 0px;
+}
+.button.inactive {
+  opacity: .4;
+  pointer-events: none;
+  cursor: auto;
+}
+.button.hide {
+  display: none;
+}
+#button-cancel {
+  color: var(--color);
+  opacity: .8;
+}
+
+
 
 @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }

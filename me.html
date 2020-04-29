@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="icon-48x48.png">
+  <meta name="theme-color" content="#fff">
+  <meta name="description" content="Travel log using an open source sheet to website template">
+  <meta name="author" content="Yuin Chien">
+  <title>Travel Log</title>
+
+  <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,500,500i,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-18616613-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-18616613-2');
+  </script>
+
+</head>
+
+<body class="loading">
+  <div id="loader"></div>
+  <div id="sections" class="wip">
+    <div id="footer"><span class="button" id="button-edit">Edit Sheet ID</span></div>
+  </div>
+  <div id="form" class="wip">
+    <div class="buttons">
+      <div id="button-cancel" class="button">CANCEL</div>
+      <div id="button-save" class="button inactive">SAVE</div>
+    </div>
+    <div class="wrapper">
+      <p>Save your Google sheet ID using localStorage and access your Travel Log at traces.report/me.</p>
+      <input type="text" id="input-id" name="fname" placeholder="Sheet ID" autocomplete="off">
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+
+  const load = () => {
+    let sheetID = localStorage.getItem('sheetID');
+    document.querySelectorAll('.section').forEach(function(element){
+      element.remove();
+    });
+    fetchTabs(sheetID)
+      .then(data => {
+        if(data==-1) {
+          console.log("clear localStorage");
+          localStorage.clear();
+          toggleEdit(true);
+          document.body.classList.remove('loading');
+          return;
+        }
+        var sheetName = "";
+        for(title in data) {
+          if(data[title].index==0) {
+            sheetName = data[title].title;
+            break;
+          }
+        }
+        fetchRows(sheetID, sheetName)
+          .then(data => {
+            create(data);
+            createOverview(data);
+            document.body.classList.remove('loading');
+          })
+      })
+  }
+
+  const initEvents = () => {
+
+    let input = document.getElementById("input-id");
+    let sheetID = localStorage.getItem('sheetID');
+
+    document.getElementById("button-cancel").addEventListener('click', function(e){
+      toggleEdit(false);
+    });
+
+    var buttonSave = document.getElementById("button-save");
+    buttonSave.addEventListener('click', function(e){
+      sheetID = input.value.trim();
+      localStorage.setItem("sheetID", sheetID);
+      document.body.classList.add('loading');
+      toggleEdit(false);
+      load();
+    });
+
+    input.addEventListener('input', updateValue);
+    function updateValue(e) {
+      buttonSave.classList.toggle("inactive", !e.target.value.length>0);
+    }
+
+    var buttonEdit = document.getElementById("button-edit");
+    buttonEdit.addEventListener('click', function(e){
+      toggleEdit(true);
+    });
+  }
+
+  const toggleEdit = (value) => {
+    const input = document.getElementById("input-id");
+    let sheetID = localStorage.getItem('sheetID');
+    document.getElementById("button-cancel").classList.toggle("hide", !sheetID);
+    if(value) {
+      input.value = sheetID || "";
+      document.body.classList.add("edit");
+      input.focus();
+    } else {
+      document.body.classList.remove("edit");
+    }
+  }
+
+  const handleClientLoad = () => {
+    initEvents();
+    let sheetID = localStorage.getItem('sheetID');
+    if(!sheetID) {
+      toggleEdit(true);
+      document.body.classList.remove('loading');
+    } else {
+      load();
+    }
+  }
+  </script>
+  <script async defer src="https://apis.google.com/js/api.js"
+    onload="this.onload=function(){};handleClientLoad()"
+    onreadystatechange="if (this.readyState === 'complete') this.onload()">
+  </script>
+</body>

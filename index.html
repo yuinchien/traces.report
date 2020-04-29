@@ -27,12 +27,12 @@
 <body class="loading">
   <div id="loader"></div>
   <div id="sections" class="wip">
-    <div id="footer">An open source <a href="https://github.com/yuinchien/log">project</a> by <a href="https://yuinchien.com/">Yuin</a>.</div>
+    <div id="footer">This is a sample site generated with a sheet-to-site template by <a href="https://yuinchien.com/">Yuin</a>. Create and access your personal Travel Log at <a href="/me">traces.report/me</a>. Checkout the instructions on <a href="https://github.com/yuinchien/traces.report">Github</a>.</div>
   </div>
   <script src="script.js"></script>
   <script>
   const handleClientLoad = () => {
-  	fetchTabs()
+  	fetchTabs(SAMPLE_SHEET_ID)
   		.then(data => {
   			var sheetName = "";
   			for(title in data) {
@@ -41,7 +41,7 @@
   					break;
   				}
   			}
-  			fetchRows(sheetName)
+  			fetchRows(SAMPLE_SHEET_ID, sheetName)
   				.then(data => {
   					create(data);
             createOverview(data);
