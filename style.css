@@ -229,6 +229,8 @@ input {
   line-height: 1.6em;
   width: 100%;
   color: var(--color);
+  border-radius: 0;
+  padding-left: 0;
 }
 input:focus {
   border-bottom: 2px solid var(--highlight);
