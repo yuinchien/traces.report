@@ -20,8 +20,8 @@ Take the following steps to create your own site:
 
 ––––
 
-I've been keeping travel records in a Google Spreadsheet for many years, and this project has evolved over time. The current design enables me to reflect on my personal history and the relationship with different places I've lived, visited and left. It was a lovely surprise to open source the project, I hope more people can enjoy it like I have. Please file issue or get in touch if there's any problem.
+This is a personal [project](https://yuinchien.com/traces-report/) of [Yuin](https://yuinchien.com/). I've been keeping travel records in a Google Spreadsheet for many years, and this project has evolved over time. The current design enables me to reflect on my personal history and the relationship with different places I've lived, visited and left. 
 
-–––
+It was a lovely surprise to open source the project, I hope more people can enjoy it like I have. Please file issue or get in touch if there's any problem.
 
-This is a personal [project](https://yuinchien.com/traces-report/) of [Yuin](https://yuinchien.com/). Special thanks to @liquidx and @jonobr1 for pointing me to the right direction. And friends who brainstorm ideas and names with me! 
+Special thanks to @liquidx and @jonobr1 for pointing me to the right direction. And friends who brainstorm ideas and names with me! 
