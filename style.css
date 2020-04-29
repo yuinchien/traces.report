@@ -231,20 +231,23 @@ input {
   color: var(--color);
 }
 input:focus {
-  border-bottom: 2px solid var(--color-link);
+  border-bottom: 2px solid var(--highlight);
 }
 .buttons {
   position: absolute;
   right: 0;
   top: 0;
   font-size: 0.8em;
+  margin-top: -.4em;
+}
+.buttons .button {
+  padding: 0px 0px 0px 16px;
 }
 .button {
   cursor: pointer;
   pointer-events: auto;
   color: var(--color-link);
   display: inline-block;
-  padding: 0px 16px 0px 0px;
 }
 .button.inactive {
   opacity: .4;
@@ -335,5 +338,15 @@ input:focus {
   }
   .mobile-hide {
     display: none;
+  }
+  #form {
+    padding: 0;
+    font-size: 1em;
+    height: auto;
+    padding-top: 10vh;
+  }
+  #form p {
+    font-size: 1.2em;
+    padding-right: 0;
   }
 }
