@@ -1,0 +1,15 @@
+{
+  "background_color": "white",
+  "description": "An open source sheet-to-site template for personal travel log",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "icon_192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "name": "Traces Report",
+  "short_name": "Traces Report",
+  "start_url": "me.html"
+}
