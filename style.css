@@ -177,6 +177,7 @@ body.loading #loader {
 #footer {
   margin-top: 4em;
   max-width: 880px;
+  line-height: 1.2em;
 }
 #footer .button {
   padding: 0;
