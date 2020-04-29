@@ -18,10 +18,10 @@ Take the following steps to create your own site:
 
 5. You can now access your personal site at <a href="https://traces.report/me">traces.report/me</a>
 
+Please file issue or get in touch if there's any problem.
+
 ––––
 
 I've been keeping travel records in a Google Spreadsheet for many years, and this project has evolved over time. The current design enables me to reflect on my personal history and the relationship with different places I've lived, visited and left. Learn more about the design at <a>[yuinchien.com/traces-report](https://yuinchien.com/traces-report/).
-
-Please file issue or get in touch if there's any problem.
 
 Special thanks to @liquidx and @jonobr1 for pointing me to the right direction. And friends who brainstorm ideas and names with me! 
