@@ -1,5 +1,5 @@
 # traces.report
-This project aims to surface travel patterns that might be hidden and shed new light on the relationship between people and places. Checkout the sample site generated from the <a href="https://docs.google.com/spreadsheets/d/1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw/edit#gid=0" target="_blank">spreadsheet<a> at <a href="https://traces.report/">https://traces.report</a>. You can create and access your personal site at <a href="https://traces.report/me">https://traces.report/me</a> using localStorage.
+This project aims to surface travel patterns that might be hidden and shed new light on the relationship between people and places. Checkout the sample site generated from the <a href="https://docs.google.com/spreadsheets/d/1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw/edit#gid=0" target="_blank">spreadsheet<a> at <a href="https://traces.report/">traces.report</a>. You can create and access your personal site at <a href="https://traces.report/me">traces.report/me</a> using localStorage.
 
 ![alt text](https://traces.report/screenshots/site.png "Screenshot")
 
