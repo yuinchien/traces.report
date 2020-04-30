@@ -8,7 +8,7 @@ This project aims to surface travel patterns that might be hidden and shed new l
 
 ## Create your personal site
 
-You can create personal site easily. Follow the steps:
+It's easy to create one. Follow the steps:
 
 1. Create a Google spreadsheet following the spreadsheet <a href="https://docs.google.com/spreadsheets/d/1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw/edit#gid=0" target="_blank">template<a>
 
