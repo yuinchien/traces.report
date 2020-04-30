@@ -29,4 +29,4 @@ Please file issue or get in touch if there's any problem.
 
 I've been keeping travel records in a Google Spreadsheet for many years, and this project has evolved over time. The current design enables me to reflect on my personal history and the relationship with different places I've lived, visited and left. Learn more about the design at <a>[yuinchien.com/traces-report](https://yuinchien.com/traces-report/).
 
-Special thanks to @liquidx and @jonobr1 for pointing me in the right direction. And friends who brainstorm ideas and names with me!
+Special thanks to @liquidx and @jonobr1 for pointing me in the right direction. And friends who inspire and brainstorm ideas with me!
