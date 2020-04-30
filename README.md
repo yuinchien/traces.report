@@ -1,11 +1,14 @@
 # traces.report
+
 ![alt text](https://traces.report/screenshots/mobile.png "Screenshot")
 
 This project aims to surface travel patterns that might be hidden and shed new light on the relationship between people and places. Checkout the sample site generated from the <a href="https://docs.google.com/spreadsheets/d/1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw/edit#gid=0" target="_blank">spreadsheet<a> at <a href="https://traces.report/">traces.report</a>. You can create and access your personal site at <a href="https://traces.report/me">traces.report/me</a> using localStorage.
 
 ![alt text](https://traces.report/screenshots/site.png "Screenshot")
 
-Take the following steps to create your own site:
+## Create your personal site
+
+You can create personal site easily. Follow the steps:
 
 1. Create a Google spreadsheet following the spreadsheet <a href="https://docs.google.com/spreadsheets/d/1j4yfiowEPDtMrYZyBqAV5Esujp8KCHBd9NrMs8-QVZw/edit#gid=0" target="_blank">template<a>
 
@@ -22,7 +25,7 @@ Take the following steps to create your own site:
 
 Please file issue or get in touch if there's any problem.
 
-––––
+## Notes
 
 I've been keeping travel records in a Google Spreadsheet for many years, and this project has evolved over time. The current design enables me to reflect on my personal history and the relationship with different places I've lived, visited and left. Learn more about the design at <a>[yuinchien.com/traces-report](https://yuinchien.com/traces-report/).
 
